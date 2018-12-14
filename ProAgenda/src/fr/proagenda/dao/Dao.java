@@ -15,7 +15,7 @@ import fr.proagenda.classes.User;
  *
  */
 public class Dao {
-	
+	//ceci est un test GIt
 	private static String url = "jdbc:mysql://localhost:3306/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
 	private static String login = "root";
 	private static String passwd = "toor";
