@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import fr.proagenda.classes.PropertyAcces;
 
 public class DaoRetNomPrenom {
-	private ArrayList<String> ret;
+	private ArrayList<Object> ret;
 	
 	private static PropertyAcces prop = new PropertyAcces();
 	private static String url = "jdbc:mysql://"+prop.getDbAddress()+":"+prop.getDbPort()+"/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
@@ -52,9 +52,13 @@ public class DaoRetNomPrenom {
  			rs = st.executeQuery(sql);
 
  			// Si récup données alors étapes 5 (parcours Resultset)
- 			ArrayList<String> envoie= new ArrayList<>();
+ 			ArrayList<Object> envoie= new ArrayList<>();
  			
  			while (rs.next()) {
+
+// 				Object[] itemData = new Object[] {rs.getInt("id_account"), rs.getString("nom_account"),rs.getString("prenom_account")};
+// 				System.out.println("test : "+itemData[0]);
+ 				envoie.add(rs.getInt("id_account"));
  				envoie.add(rs.getString("nom_account"));
  				envoie.add(rs.getString("prenom_account"));
  				setRet(envoie);
@@ -74,11 +78,11 @@ public class DaoRetNomPrenom {
  		}
 	}
 
-	public ArrayList<String> getRet() {
+	public ArrayList<Object> getRet() {
 		return ret;
 	}
 
-	public void setRet(ArrayList<String> ret) {
+	public void setRet(ArrayList<Object> ret) {
 		this.ret = ret;
 	}
 	

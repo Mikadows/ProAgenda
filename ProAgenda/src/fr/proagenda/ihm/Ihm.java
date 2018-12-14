@@ -30,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
@@ -60,6 +61,7 @@ public class Ihm extends JFrame{
 	private JRadioButton rdbtnAfficher;
 	private JLabel lblTaillemdp;
 	private JComboBox<String> comboBox;
+	private JComboBox<Object[]> comboBoxObj;
 	private JToggleButton tglbtnRetour;
 	private JButton btnValider;
 	private JCheckBox chckbxNewCheckBox;
@@ -570,18 +572,20 @@ public class Ihm extends JFrame{
 	}
 	
 	public void afficheChoixTechnicienORDERBYNAME(JPanel fils) {
-		comboBox = new JComboBox<String>();
-
-	    comboBox.setBounds(320, 30, 200, 20);
+		comboBoxObj = new JComboBox<Object[]>();
+		comboBoxObj.setBounds(320, 30, 200, 20);
 	    
-	    fils.add(comboBox);
-	    comboBox.addItem("");
+	    fils.add(comboBoxObj);
+	   // comboBoxObj.addItem("");
 	    
 	    DaoRetNomPrenom data = new DaoRetNomPrenom();
-		ArrayList<String> test = data.getRet();
+		ArrayList<Object> test = data.getRet();
 		
-		for(int i = 0; i < test.size(); i+=2 ) {
-			comboBox.addItem(test.get(i)+" "+test.get(i+1));
+		for(int i = 0; i < test.size(); i+=3 ) {
+			Object[] itemData = new Object[] {test.get(i), test.get(i+1),test.get(i+2)};
+			comboBoxObj.addItem(itemData);
+			//System.out.println("test : "+test.get(i));
+			//comboBox.addItem(test.get(i)+" "+test.get(i+1));
 		} 		
  		
  		JButton btnValider = new JButton("Valider");
