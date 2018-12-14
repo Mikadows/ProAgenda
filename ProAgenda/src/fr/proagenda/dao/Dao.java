@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import fr.proagenda.classes.PropertyAcces;
 import fr.proagenda.classes.User;
 
 /**
@@ -15,10 +16,11 @@ import fr.proagenda.classes.User;
  *
  */
 public class Dao {
-	//ceci est un test GIt
-	private static String url = "jdbc:mysql://localhost:3306/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-	private static String login = "root";
-	private static String passwd = "toor";
+
+	private static PropertyAcces prop = new PropertyAcces();
+	private static String url = "jdbc:mysql://"+prop.getDbAddress()+":"+prop.getDbPort()+"/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+	private static String login = prop.getDbLogin();
+	private static String passwd = prop.getDbPswd();
 	private static Connection cn =null;
 	private static PreparedStatement pstmt =null;
 	private static ResultSet rs =null;

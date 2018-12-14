@@ -8,12 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import fr.proagenda.classes.PropertyAcces;
+
 public class DaoRetRDV {
 	private ArrayList<String> ret;
 	
-	static String url = "jdbc:mysql://localhost:3306/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-	static String login = "root";
-	static String passwd = "toor";
+	private static PropertyAcces prop = new PropertyAcces();
+	private static String url = "jdbc:mysql://"+prop.getDbAddress()+":"+prop.getDbPort()+"/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+	private static String login = prop.getDbLogin();
+	private static String passwd = prop.getDbPswd();
 	static Connection cn =null;
 	static PreparedStatement pstmt =null;
 	static ResultSet rs =null;
