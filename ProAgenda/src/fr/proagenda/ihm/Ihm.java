@@ -49,8 +49,8 @@ import fr.proagenda.classes.User;
  */
 @SuppressWarnings("serial")
 public class Ihm extends JFrame{
-	private int height= 900;
-	private int width = 500; 
+	private static int height= 900;
+	private static int width = 500; 
 
 	private JPanel contentPane;
 	private JTextField pseudoField;
@@ -70,14 +70,28 @@ public class Ihm extends JFrame{
 	private JCheckBox chckbxNewCheckBox;
 	private JProgressBar progressBar ;
 	private JTable table_1;
+	private Button validBtn;
+	private Button button;
+	private JButton btnRetour;
+	private JButton btnVoirLesRendezvous;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JButton btnRetour_1;
 	
 
 	
 	/**
-	 * Create the frame.
+	 * Fenetre Principale : Log de l'application 
 	 * @return 
+	 * TODO modifier le passage de l'utilisateur entre les fonctions : User --> int ID  
 	 */
 	public Ihm() {
+		
+		try { 
+		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, height, width);
 		contentPane = new JPanel();
@@ -111,7 +125,22 @@ public class Ihm extends JFrame{
         separator_1.setBounds(232, 107, 420, 2);
         contentPane.add(separator_1);
 		
-		Button validBtn = new Button("Valider");
+		validBtn = new Button("Valider");
+		validBtn.setBounds(412, 255, 70, 22);
+		contentPane.add(validBtn);
+		
+		button = new Button("Nouvel utilisateur");
+		button.setBounds(374, 338, 156, 22);
+		contentPane.add(button);
+		
+		listenerIHM(contentPane);
+	}
+	
+	/**
+	 * Contient tous les listener du constructeur Ihm()
+	 * listener fenetre principale
+	 */
+	public void listenerIHM(JPanel fils) {
 		validBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String pseudo = pseudoField.getText();
@@ -130,38 +159,27 @@ public class Ihm extends JFrame{
 //					deuxiemeFenetre(contentPane,next);
 					menuDeLaMortQuiTue(contentPane,next);
 				}
-				//User test = new User(pseudo,new String (motPasse));
 				}
 			}
 		);
-		validBtn.setBounds(412, 255, 70, 22);
-		contentPane.add(validBtn);
 		
-		Button button = new Button("Nouvel utilisateur");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				nouvelUtilisateur(contentPane);
 				DefineNouvelUtilisateurFenetre(contentPane);
 				
 			}
 		});
-		button.setBounds(374, 338, 156, 22);
-		contentPane.add(button);	
 	}
 	
+	/**
+	 * menu avec voir les rendez vous, modifier mot de passe et modifier login
+	 * @param fils : fenetre initiante 
+	 * @param user : User contenant les informations de l'utilisateur 
+	 */
 	public void menuDeLaMortQuiTue(JPanel fils, User user) {
 		fils.removeAll();
-		try { 
-		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
 		
-		JButton btnRetour = new JButton("Déconnexion");
-		btnRetour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnRetour = new JButton("Déconnexion");
 		btnRetour.setIcon(new ImageIcon(Ihm.class.getResource("/javax/swing/plaf/metal/icons/ocean/error.png")));
 		btnRetour.setBounds(374, 409, 142, 41);
 		fils.add(btnRetour);
@@ -175,33 +193,18 @@ public class Ihm extends JFrame{
 		separator.setBounds(346, 180, 185, 2);
 		fils.add(separator);
 		
-		JButton btnVoirLesRendezvous = new JButton("Voir les rendez-vous");
-		btnVoirLesRendezvous.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				deuxiemeFenetre(fils, user);
-			}
-		});
+		btnVoirLesRendezvous = new JButton("Voir les rendez-vous");
 		btnVoirLesRendezvous.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/DrawHorizontalLine_16x16_JFX.png")));
 		btnVoirLesRendezvous.setBounds(346, 229, 185, 23);
 		fils.add(btnVoirLesRendezvous);
 		
-		JButton btnNewButton = new JButton("Modifier Mot de Passe");
+		btnNewButton = new JButton("Modifier Mot de Passe");
 		btnNewButton.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				afficheModifierMDP(fils,user);
-			}
-		});
 		btnNewButton.setBounds(346, 283, 185, 23);
 		fils.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Modifier Identifiant");
+		btnNewButton_1 = new JButton("Modifier Identifiant");
 		btnNewButton_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				afficheModifierPseudo(fils,user);
-			}
-		});
 		btnNewButton_1.setBounds(346, 337, 185, 23);
 		fils.add(btnNewButton_1);
 		
@@ -216,28 +219,61 @@ public class Ihm extends JFrame{
 		
 		fils.revalidate();
 		fils.repaint();
+		
+		listenerMenuDeLaMortQuiTue(fils, user);
 	}
+	
 	/**
-	 * 
-	 * @param test
-	 * @param utilisateur
+	 * Contient tous les listener menuDeLaMortQuiTue(JPanel fils, User user)
+	 * @param fils : JPannel de la fenetre précédente 
+	 * @param user : utilisateur en cours d'utilisation
 	 */
-	public void deuxiemeFenetre(JPanel test, User utilisateur) {
-		test.removeAll();
-		afficheChoixTechnicienOrderByNameUSER(test);
+	public void listenerMenuDeLaMortQuiTue(JPanel fils,User user) {
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		
+		btnVoirLesRendezvous.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deuxiemeFenetre(fils, user);
+			}
+		});
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				afficheModifierMDP(fils,user);
+			}
+		});
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				afficheModifierPseudo(fils,user);
+			}
+		});
+	}
+	
+	/**
+	 * fenetre affichant de le choix du technicien pour voir ses rendez vous 
+	 * @param fils : JPannel de la fenetre précédente
+	 * @param user : utilisateur en cours 
+	 */
+	public void deuxiemeFenetre(JPanel fils, User user) {
+		fils.removeAll();
+		afficheChoixTechnicienOrderByNameUSER(fils);
 		JButton btnRetour_1 = new JButton("Retour");
 		
         btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
         btnRetour_1.setBounds(10, 11, 89, 23);
         btnRetour_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuDeLaMortQuiTue(test, utilisateur);
+				menuDeLaMortQuiTue(fils, user);
 			}
 		});
         contentPane.add(btnRetour_1);
 	
-		test.revalidate();
-		test.repaint();
+		fils.revalidate();
+		fils.repaint();
 	}
 	
 	/**
@@ -327,9 +363,10 @@ public class Ihm extends JFrame{
 	    
 	    
 	    /*Déclaration des Boutons*/
-	    tglbtnRetour = new JToggleButton("retour");
-	    tglbtnRetour.setBounds(0, 0, 121, 23);
-	    fils.add(tglbtnRetour); 
+	    btnRetour_1 = new JButton("Retour");
+	    btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
+        btnRetour_1.setBounds(10, 11, 89, 23);
+        fils.add(btnRetour_1);
 	    
 	    btnValider = new JButton("Valider");
 	    btnValider.setEnabled(false);
@@ -373,7 +410,7 @@ public class Ihm extends JFrame{
 	    int Decalage = 130;
 	    
 	    
-		tglbtnRetour.addActionListener(new ActionListener() {
+	    btnRetour_1.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent arg0) {
 
 	            dispose();
@@ -544,6 +581,11 @@ public class Ihm extends JFrame{
 		});
 	}
 	
+	/**
+	 * affichage des champs pour modifier le mot de passe 
+	 * @param fils : JPannel de la fenetre précédente
+	 * @param utilisateur : User utilisateur en cours 
+	 */
 	private void afficheModifierMDP(JPanel fils,User utilisateur) {
 		fils.removeAll();
 		
@@ -597,6 +639,11 @@ public class Ihm extends JFrame{
 		fils.repaint();
 	}
 	
+	/** 
+	 * affichage de la modification du pseudo
+	 * @param fils : JPannel de la fenetre précédente
+	 * @param utilisateur : User utilisateur en cours 
+	 */
 	private void afficheModifierPseudo(JPanel fils,User utilisateur) {
 		
 		fils.removeAll();
@@ -648,6 +695,11 @@ public class Ihm extends JFrame{
 		fils.repaint();
 	}
 	
+	/**
+	 * @deprecated --> better to use  afficheChoixTechnicienOrderByNameUSER(JPanel fils)
+	 * affichage du choix du technicien pour voir ses rendez vous 
+	 * @param fils : Jpannel de la fenetre précédente
+	 */
 	public void afficheChoixTechnicienOrderByNameOBJECT(JPanel fils) {
 		
 		comboBoxObj = new JComboBox<Object[]>();
@@ -678,7 +730,12 @@ public class Ihm extends JFrame{
 		});
 	}
 	
-public void afficheChoixTechnicienOrderByNameUSER(JPanel fils) {
+	/**
+	 * !REMPLACE : afficheChoixTechnicienOrderByNameOBJECT(JPanel fils)!
+	 * affichage du choix du technicien pour voir ses rendez vous 
+	 * @param fils : Jpannel de la fenetre précédente
+	 */
+	public void afficheChoixTechnicienOrderByNameUSER(JPanel fils) {
 		
 		comboBox = new JComboBox<String>();
 		comboBox.setBounds(320, 30, 200, 20);
@@ -706,6 +763,12 @@ public void afficheChoixTechnicienOrderByNameUSER(JPanel fils) {
 		});
 	}
 
+	/**
+	 * affiche un JTable avec les date des RDV 
+	 * @param fils : JPannel de la fenetre précédente 
+	 * @param id_account : Int ID du technicien a voir les rendez vous 
+	 * TODO Fonction de découpage de la date et l'heure 
+	 */
 	public void afficheRDV(JPanel fils,int id_account) {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(250, 70, 400, 200);
