@@ -32,9 +32,11 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
+import javax.swing.ImageIcon;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
@@ -125,7 +127,8 @@ public class Ihm extends JFrame{
 					contentPane.repaint();
 				}else if (connexion == 1) {
 					User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
-					deuxiemeFenetre(contentPane,next);
+//					deuxiemeFenetre(contentPane,next);
+					menuDeLaMortQuiTue(contentPane,next);
 				}
 				//User test = new User(pseudo,new String (motPasse));
 				}
@@ -146,6 +149,72 @@ public class Ihm extends JFrame{
 		contentPane.add(button);	
 	}
 	
+	public void menuDeLaMortQuiTue(JPanel fils, User user) {
+		fils.removeAll();
+		try { 
+		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		
+		JButton btnRetour = new JButton("Déconnexion");
+		btnRetour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnRetour.setIcon(new ImageIcon(Ihm.class.getResource("/javax/swing/plaf/metal/icons/ocean/error.png")));
+		btnRetour.setBounds(374, 409, 142, 41);
+		fils.add(btnRetour);
+		
+		JLabel lblMenu = new JLabel("Menu");
+		lblMenu.setFont(new Font("Tahoma", Font.ITALIC, 50));
+		lblMenu.setBounds(374, 107, 142, 75);
+		fils.add(lblMenu);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(346, 180, 185, 2);
+		fils.add(separator);
+		
+		JButton btnVoirLesRendezvous = new JButton("Voir les rendez-vous");
+		btnVoirLesRendezvous.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				deuxiemeFenetre(fils, user);
+			}
+		});
+		btnVoirLesRendezvous.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/DrawHorizontalLine_16x16_JFX.png")));
+		btnVoirLesRendezvous.setBounds(346, 229, 185, 23);
+		fils.add(btnVoirLesRendezvous);
+		
+		JButton btnNewButton = new JButton("Modifier Mot de Passe");
+		btnNewButton.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(346, 283, 185, 23);
+		fils.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Modifier Identifiant");
+		btnNewButton_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(346, 337, 185, 23);
+		fils.add(btnNewButton_1);
+		
+		JLabel lblProagenda = new JLabel("ProAgenda");
+		lblProagenda.setFont(new Font("Tahoma", Font.PLAIN, 70));
+		lblProagenda.setBounds(282, 11, 340, 85);
+		fils.add(lblProagenda);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(232, 107, 420, 2);
+		fils.add(separator_1);
+		
+		fils.revalidate();
+		fils.repaint();
+	}
 	/**
 	 * 
 	 * @param test
@@ -153,46 +222,19 @@ public class Ihm extends JFrame{
 	 */
 	public void deuxiemeFenetre(JPanel test, User utilisateur) {
 		test.removeAll();
-		
-		
 		afficheChoixTechnicienOrderByNameUSER(test);
-
-		menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 97, 21);
-		test.add(menuBar_1);
+		JButton btnRetour_1 = new JButton("Retour");
 		
-		JMenu mnCompte_1 = new JMenu("Compte");
-		menuBar_1.add(mnCompte_1);
-		
-		JMenuItem mntmModifierPseudo_1 = new JMenuItem("Modifier  Pseudo");
-		mnCompte_1.add(mntmModifierPseudo_1);
-		
-		JMenuItem mntmModifierMotDe_1 = new JMenuItem("Modifier Mot de passe");
-		mnCompte_1.add(mntmModifierMotDe_1);
-		
-		JMenuItem mntmConsulterLesInformations_1 = new JMenuItem("consulter les informations");
-		mnCompte_1.add(mntmConsulterLesInformations_1);
-		
-		mntmModifierPseudo_1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				afficheModifierPseudo(test,utilisateur);
-				
+        btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
+        btnRetour_1.setBounds(10, 11, 89, 23);
+        btnRetour_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuDeLaMortQuiTue(test, utilisateur);
 			}
 		});
-		
-		mntmModifierMotDe_1.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				afficheModifierMDP(test,utilisateur);
-				
-			}
-		});
-		
+        contentPane.add(btnRetour_1);
+	
 		test.revalidate();
-		
 		test.repaint();
 	}
 	
