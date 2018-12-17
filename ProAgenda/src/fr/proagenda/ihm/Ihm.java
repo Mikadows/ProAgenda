@@ -189,6 +189,7 @@ public class Ihm extends JFrame{
 		btnNewButton.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				afficheModifierMDP(fils,user);
 			}
 		});
 		btnNewButton.setBounds(346, 283, 185, 23);
@@ -198,6 +199,7 @@ public class Ihm extends JFrame{
 		btnNewButton_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				afficheModifierPseudo(fils,user);
 			}
 		});
 		btnNewButton_1.setBounds(346, 337, 185, 23);
@@ -543,7 +545,19 @@ public class Ihm extends JFrame{
 	}
 	
 	private void afficheModifierMDP(JPanel fils,User utilisateur) {
-		//deuxiemeFenetre(fils);
+		fils.removeAll();
+		
+
+		JButton btnRetour_1 = new JButton("Retour");
+		
+        btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
+        btnRetour_1.setBounds(10, 11, 89, 23);
+        btnRetour_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuDeLaMortQuiTue(fils, utilisateur);
+			}
+		});
+        contentPane.add(btnRetour_1);
 		
 		JLabel lblModifierMotDe = new JLabel("nouveau mot de passe : ");
 		lblModifierMotDe.setBounds(106, 127, 356, 14);
@@ -584,7 +598,18 @@ public class Ihm extends JFrame{
 	}
 	
 	private void afficheModifierPseudo(JPanel fils,User utilisateur) {
-		//deuxiemeFenetre(fils);
+		
+		fils.removeAll();
+		JButton btnRetour_1 = new JButton("Retour");
+		
+        btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
+        btnRetour_1.setBounds(10, 11, 89, 23);
+        btnRetour_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				menuDeLaMortQuiTue(fils, utilisateur);
+			}
+		});
+        contentPane.add(btnRetour_1);
 		
 		JLabel lblModifierPseudo = new JLabel("nouveau Pseudo : ");
 		lblModifierPseudo.setBounds(106, 127, 356, 14);
