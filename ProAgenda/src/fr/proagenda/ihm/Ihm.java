@@ -27,17 +27,18 @@ import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.ListCellRenderer;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
-import fr.proagenda.dao.DaoRetNomPrenom;
-import fr.proagenda.dao.DaoRetRDV;
+
 
 /**
  * Classe IHM
@@ -46,7 +47,7 @@ import fr.proagenda.dao.DaoRetRDV;
  */
 @SuppressWarnings("serial")
 public class Ihm extends JFrame{
-	private int height=900;
+	private int height= 900;
 	private int width = 500; 
 
 	private JPanel contentPane;
@@ -82,22 +83,31 @@ public class Ihm extends JFrame{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblPseudo = new JLabel("pseudo : ");
-		lblPseudo.setBounds(298, 113, 71, 14);
+		JLabel lblPseudo = new JLabel("Pseudo : ");
+		lblPseudo.setBounds(288, 158, 71, 14);
 		contentPane.add(lblPseudo);
 		
 		JLabel lblMotDePasse = new JLabel("Mot de passe :");
-		lblMotDePasse.setBounds(267, 157, 102, 14);
+		lblMotDePasse.setBounds(257, 202, 102, 14);
 		contentPane.add(lblMotDePasse);
 		
 		pseudoField = new JTextField();
-		pseudoField.setBounds(395, 110, 156, 20);
+		pseudoField.setBounds(374, 158, 156, 20);
 		contentPane.add(pseudoField);
 		pseudoField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(395, 154, 156, 20);
+		passwordField.setBounds(374, 202, 156, 20);
 		contentPane.add(passwordField);
+		
+		JLabel lblProagenda = new JLabel("ProAgenda");
+        lblProagenda.setFont(new Font("Tahoma", Font.PLAIN, 70));
+        lblProagenda.setBounds(282, 11, 340, 85);
+        contentPane.add(lblProagenda);
+        
+        JSeparator separator_1 = new JSeparator();
+        separator_1.setBounds(232, 107, 420, 2);
+        contentPane.add(separator_1);
 		
 		Button validBtn = new Button("Valider");
 		validBtn.addActionListener(new ActionListener() {
@@ -109,7 +119,7 @@ public class Ihm extends JFrame{
 				if(connexion == 0) {
 					JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
 					lblPseudoOuMot.setForeground(Color.RED);
-					lblPseudoOuMot.setBounds(395, 250, 235, 14);
+					lblPseudoOuMot.setBounds(327, 300, 253, 14);
 					contentPane.add(lblPseudoOuMot);
 					contentPane.revalidate();
 					contentPane.repaint();
@@ -121,7 +131,7 @@ public class Ihm extends JFrame{
 				}
 			}
 		);
-		validBtn.setBounds(433, 204, 70, 22);
+		validBtn.setBounds(412, 255, 70, 22);
 		contentPane.add(validBtn);
 		
 		Button button = new Button("Nouvel utilisateur");
@@ -132,7 +142,7 @@ public class Ihm extends JFrame{
 				
 			}
 		});
-		button.setBounds(395, 336, 156, 22);
+		button.setBounds(374, 338, 156, 22);
 		contentPane.add(button);	
 	}
 	
@@ -145,7 +155,7 @@ public class Ihm extends JFrame{
 		test.removeAll();
 		
 		
-		afficheChoixTechnicienORDERBYNAME(test);
+		afficheChoixTechnicienOrderByNameUSER(test);
 
 		menuBar_1 = new JMenuBar();
 		menuBar_1.setBounds(0, 0, 97, 21);
@@ -571,19 +581,21 @@ public class Ihm extends JFrame{
 		fils.repaint();
 	}
 	
-	public void afficheChoixTechnicienORDERBYNAME(JPanel fils) {
+	public void afficheChoixTechnicienOrderByNameOBJECT(JPanel fils) {
+		
 		comboBoxObj = new JComboBox<Object[]>();
 		comboBoxObj.setBounds(320, 30, 200, 20);
 	    
 	    fils.add(comboBoxObj);
-	   // comboBoxObj.addItem("");
-	    
-	    DaoRetNomPrenom data = new DaoRetNomPrenom();
-		ArrayList<Object> test = data.getRet();
+	    //comboBoxObj.addItem((Object[])"");
+
+	    Application app = new Application();
+		ArrayList<Object> test = app.ihmtoDAOGetNomPrenom();
 		
 		for(int i = 0; i < test.size(); i+=3 ) {
 			Object[] itemData = new Object[] {test.get(i), test.get(i+1),test.get(i+2)};
 			comboBoxObj.addItem(itemData);
+			System.out.println("test obj : "+itemData.toString());
 			//System.out.println("test : "+test.get(i));
 			//comboBox.addItem(test.get(i)+" "+test.get(i+1));
 		} 		
@@ -594,12 +606,40 @@ public class Ihm extends JFrame{
  		 
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				afficheRDV(fils, (String) comboBox.getSelectedItem());
+//				afficheRDV(fils, (String)comboBox.getSelectedItem());
 			}
 		});
 	}
 	
-	public void afficheRDV(JPanel fils,String id_account) {
+public void afficheChoixTechnicienOrderByNameUSER(JPanel fils) {
+		
+		comboBox = new JComboBox<String>();
+		comboBox.setBounds(320, 30, 200, 20);
+	    
+	    fils.add(comboBox);
+	    //comboBoxObj.addItem((Object[])"");
+
+	    Application app = new Application();
+		ArrayList<User> users = app.ihmtoDAOGetNomPrenomUSER();
+		
+		for(int i = 0; i < users.size(); i++ ) {
+			comboBox.addItem(users.get(i).getNom()+" "+users.get(i).getPrenom());
+		} 		
+ 		
+ 		JButton btnValider = new JButton("Valider");
+		btnValider.setBounds(600, 30, 89, 23);
+		getContentPane().add(btnValider);
+ 		 
+		btnValider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Application app = new Application();
+				app.retIDCompteWithName((String) comboBox.getSelectedItem(), users);
+				afficheRDV(fils, app.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
+			}
+		});
+	}
+
+	public void afficheRDV(JPanel fils,int id_account) {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(250, 70, 400, 200);
 		fils.add(scrollPane);
@@ -623,8 +663,8 @@ public class Ihm extends JFrame{
 			}
 		});
 		
-		DaoRetRDV data = new DaoRetRDV();
-		ArrayList<String> test = data.getRet();
+		Application app = new Application();
+		ArrayList<String> test = app.ihmToDAOGetRdv(id_account);
 		
 		DefaultTableModel dtm = (DefaultTableModel) table_1.getModel();
 		for(int i = 0; i < test.size(); i+=4 ) {

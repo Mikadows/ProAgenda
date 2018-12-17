@@ -22,7 +22,7 @@ public class DaoRetRDV {
 	static ResultSet rs =null;
 	static Statement st =null;
 	
-	public DaoRetRDV() {
+	public DaoRetRDV(int idAccount) {
 		try {
 
  			// Etape 1 : Chargement du driver
@@ -46,7 +46,7 @@ public class DaoRetRDV {
  			// Etape 3 : Création d'un statement
  			st = cn.createStatement();
 
- 			String sql = "SELECT addr_rdv , date_heure_rdv  FROM t_rdv WHERE id_account=1";
+ 			String sql = "SELECT addr_rdv , date_heure_rdv  FROM t_rdv WHERE id_account="+idAccount;
 
  			// Etape 4 : exécution requête
  			rs = st.executeQuery(sql);

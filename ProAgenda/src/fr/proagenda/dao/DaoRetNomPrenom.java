@@ -9,9 +9,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import fr.proagenda.classes.PropertyAcces;
+import fr.proagenda.classes.User;
 
 public class DaoRetNomPrenom {
-	private ArrayList<Object> ret;
+	private ArrayList<Object> ret1;
+	private ArrayList<User> ret2;
 	
 	private static PropertyAcces prop = new PropertyAcces();
 	private static String url = "jdbc:mysql://"+prop.getDbAddress()+":"+prop.getDbPort()+"/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
@@ -25,6 +27,7 @@ public class DaoRetNomPrenom {
 	public DaoRetNomPrenom() {
 		try {
 
+			
  			// Etape 1 : Chargement du driver
  			try {
  				Class.forName("com.mysql.cj.jdbc.Driver");
@@ -53,14 +56,19 @@ public class DaoRetNomPrenom {
 
  			// Si récup données alors étapes 5 (parcours Resultset)
  			ArrayList<Object> envoie= new ArrayList<>();
+ 			ArrayList<User> envoie2 = new ArrayList<>();
  			
  			while (rs.next()) {
 
 // 				Object[] itemData = new Object[] {rs.getInt("id_account"), rs.getString("nom_account"),rs.getString("prenom_account")};
 // 				System.out.println("test : "+itemData[0]);
+ 				
  				envoie.add(rs.getInt("id_account"));
  				envoie.add(rs.getString("nom_account"));
  				envoie.add(rs.getString("prenom_account"));
+ 				User send = new User(rs.getString("nom_account"), rs.getString("prenom_account"), 1, rs.getInt("id_account"), null, null);
+ 				envoie2.add(send);
+ 				setRet2(envoie2);
  				setRet(envoie);
  			}
  				
@@ -76,16 +84,26 @@ public class DaoRetNomPrenom {
  				e.printStackTrace();
  			}
  		}
+		
+		
+		
+		
 	}
 
 	public ArrayList<Object> getRet() {
-		return ret;
+		return ret1;
+	}
+	
+	public ArrayList<User> getRet2() {
+		return ret2;
 	}
 
 	public void setRet(ArrayList<Object> ret) {
-		this.ret = ret;
+		this.ret1 = ret;
 	}
 	
-	
+	public void setRet2(ArrayList<User> ret2) {
+		this.ret2 = ret2;
+	}
 
 }
