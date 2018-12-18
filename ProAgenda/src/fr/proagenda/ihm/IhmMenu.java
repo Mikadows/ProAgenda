@@ -89,7 +89,9 @@ public class IhmMenu extends JFrame {
 	public void listenerIhmMenu(JPanel fils,User user) {
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getWindows()[0].dispose();
+				for(int i = 0; i < getWindows().length; i++ ) {
+					getWindows()[i].dispose();
+				}
 				Ihm continuer=new Ihm();
 				continuer.setVisible(true);	
 			}
