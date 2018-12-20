@@ -144,6 +144,11 @@ public class Dao {
 		}
 	}
 
+	/**
+	 * Sauvegarde un utilisateur
+	 * @param user
+	 * @return
+	 */
 	public static int saveUserDao(User user) {
 		int ret =1;
 		
@@ -196,4 +201,5 @@ public class Dao {
 		
 		return ret;		
 	}
+	
 }

@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import fr.proagenda.classes.PropertyAcces;
+import fr.proagenda.classes.Rdv;
 
 public class DaoRetRDV {
 	private ArrayList<String> ret;
@@ -87,5 +88,61 @@ public class DaoRetRDV {
 		this.ret = ret;
 	}
 
+	public static ArrayList<Rdv> getRdvByIdAccount(int idAccount){
+		ArrayList<Rdv> list = new ArrayList<Rdv>();
+		
+		try {
+
+ 			// Etape 1 : Chargement du driver
+ 			try {
+ 				Class.forName("com.mysql.cj.jdbc.Driver");
+ 			}catch(ClassNotFoundException err){
+ 				System.err.println("Pilote non trouvé..");
+ 				System.err.println(err);
+ 				//     System.exit(1) ;
+ 			}
+
+ 			// Etape 2 : récupération de la connexion
+ 			try {
+ 				cn = DriverManager.getConnection(url, login, passwd);
+ 			}catch(SQLException err) {
+ 				System.err.println("Connexion impossible");
+ 				System.err.println(err);
+ 				//System.exit(1) ;
+ 			}
+
+ 			// Etape 3 : Création d'un statement
+ 			st = cn.createStatement();
+
+ 			String sql = "SELECT *  FROM t_rdv WHERE id_account="+idAccount;
+
+ 			// Etape 4 : exécution requête
+ 			rs = st.executeQuery(sql);
+
+ 			// Si récup données alors étapes 5 (parcours Resultset)
+
+ 			while (rs.next()) {
+ 				Rdv r = new Rdv(rs.getDate("date_heure_rdv"), rs.getString("addr_rdv"), rs.getInt("id_rdv"), rs.getInt("id_account"));
+ 				list.add(r);
+ 			}
+ 			System.out.println("Rdv chargés");
+ 				
+ 			
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 		} finally {
+ 			try {
+ 			// Etape 6 : libérer ressources de la mémoire.
+ 				cn.close();
+ 				st.close();
+ 			} catch (SQLException e) {
+ 				e.printStackTrace();
+ 			}
+ 		}
+		
+		
+		return list;
+		
+	}
 
 }
