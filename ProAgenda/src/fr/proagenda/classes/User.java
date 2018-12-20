@@ -25,7 +25,7 @@ public class User {
 		this.idMetier= idMetier;
 		this.pseudo = pseudo;
 		this.encryptedPassword = password;
-		this.idCompte=idCompte;
+		this.idCompte = 0;
 	}
 	
 	public User(String pseudo,String password) {
