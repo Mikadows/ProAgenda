@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import fr.proagenda.dao.Dao;
 import fr.proagenda.dao.DaoRetNomPrenom;
 import fr.proagenda.dao.DaoRetRDV;
+import fr.proagenda.classes.Rdv;
 import fr.proagenda.classes.User;
 
 /**
@@ -135,5 +136,13 @@ public class Application {
 		return valID;
 	}
 	
+	/**
+	 * Retourne la liste des rdv en fonction de l'idAccount
+	 * @param idAccount
+	 * @return
+	 */
+	public static ArrayList<Rdv> getListRdvByIdAccount(int idAccount){
+		return DaoRetRDV.getRdvByIdAccount(idAccount);
+	}
 	
 }
