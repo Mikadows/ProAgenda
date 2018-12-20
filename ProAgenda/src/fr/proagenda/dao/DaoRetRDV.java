@@ -120,7 +120,6 @@ public class DaoRetRDV {
  			rs = st.executeQuery(sql);
 
  			// Si récup données alors étapes 5 (parcours Resultset)
-
  			while (rs.next()) {
  				Rdv r = new Rdv(rs.getDate("date_heure_rdv"), rs.getString("addr_rdv"), rs.getInt("id_rdv"), rs.getInt("id_account"));
  				list.add(r);

@@ -16,6 +16,13 @@ public class Rdv {
 	private int idRdv;
 	private int idAccount;
 
+	/**
+	 * Constructeur de classe
+	 * @param date
+	 * @param adresse
+	 * @param idRdv
+	 * @param idAccount
+	 */
 	public Rdv(Date date, String adresse, int idRdv, int idAccount) {
 		SimpleDateFormat formater = null;
 		
