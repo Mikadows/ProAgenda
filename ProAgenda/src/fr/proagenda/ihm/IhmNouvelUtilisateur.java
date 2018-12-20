@@ -1,259 +1,112 @@
 package fr.proagenda.ihm;
 
-import java.awt.Button;
-import java.awt.Color;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.ListCellRenderer;
-import javax.swing.OverlayLayout;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Font;
-import javax.swing.ImageIcon;
+import java.awt.Color;
 
-import fr.proagenda.application.Application;
-import fr.proagenda.classes.User;
-import fr.proagenda.ihm.IhmMenu;;
+public class IhmNouvelUtilisateur extends JPanel {
 
+
+private JTextField textFieldPrenom;
+private JTextField textFieldPseudo;
+private JPasswordField passwordField;
+private JPasswordField passwordField_1;
+private JProgressBar progressBar;
+private JComboBox<String> comboBox;
+private JButton btnRetour_1;
+private JButton btnValider;
+private JRadioButton rdbtnAfficher;
+private JCheckBox chckbxNewCheckBox;
+private JLabel lblTaillemdp;
+private JTextField textFieldNom;
 
 /**
- * Classe IHM
- * @author Mathieu
- *
- */
-@SuppressWarnings("serial")
-public class Ihm extends JFrame{
-	private static int height= 900;
-	private static int width = 500; 
-
-	private JPanel contentPane;
-	private JTextField pseudoField;
-	private JTextField pseudoField_1;
-	private JPasswordField passwordField;
-	private JPasswordField passwordField_1;
-	private JMenuBar menuBar_1;
-	private JTextField textFieldNom;
-	private JTextField textFieldPrenom;
-	private JTextField textFieldPseudo;
-	private JRadioButton rdbtnAfficher;
-	private JLabel lblTaillemdp;
-	private JComboBox<String> comboBox;
-	private JComboBox<Object[]> comboBoxObj;
-	private JToggleButton tglbtnRetour;
-	private JButton btnValider;
-	private JCheckBox chckbxNewCheckBox;
-	private JProgressBar progressBar ;
-	private JTable table_1;
-	private Button validBtn;
-	private Button button;
-	private JButton btnRetour;
-	private JButton btnVoirLesRendezvous;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JButton btnRetour_1;
-	
-
-	
-	/**
-	 * Fenetre Principale : Log de l'application 
-	 * @return 
-	 * TODO modifier le passage de l'utilisateur entre les fonctions : User --> int ID  
-	 */
-	public Ihm() {
-		
-		try { 
-		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, height, width);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		JLabel lblPseudo = new JLabel("Pseudo : ");
-		lblPseudo.setBounds(288, 158, 71, 14);
-		contentPane.add(lblPseudo);
-		
-		JLabel lblMotDePasse = new JLabel("Mot de passe :");
-		lblMotDePasse.setBounds(257, 202, 102, 14);
-		contentPane.add(lblMotDePasse);
-		
-		pseudoField = new JTextField();
-		pseudoField.setBounds(374, 158, 156, 20);
-		contentPane.add(pseudoField);
-		pseudoField.setColumns(10);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(374, 202, 156, 20);
-		contentPane.add(passwordField);
-		
-		JLabel lblProagenda = new JLabel("ProAgenda");
-        lblProagenda.setFont(new Font("Tahoma", Font.PLAIN, 70));
-        lblProagenda.setBounds(282, 11, 340, 85);
-        contentPane.add(lblProagenda);
-        
-        JSeparator separator_1 = new JSeparator();
-        separator_1.setBounds(232, 107, 420, 2);
-        contentPane.add(separator_1);
-		
-		validBtn = new Button("Valider");
-		validBtn.setBounds(412, 255, 70, 22);
-		contentPane.add(validBtn);
-		
-		button = new Button("Nouvel utilisateur");
-		button.setBounds(374, 338, 156, 22);
-		contentPane.add(button);
-		
-		listenerIHM(contentPane);
-		
-		
-	}
-	
-	/**
-	 * Contient tous les listener du constructeur Ihm()
-	 * listener fenetre principale
-	 */
-	public void listenerIHM(JPanel fils) {
-		validBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String pseudo = pseudoField.getText();
-				char []motPasse = passwordField.getPassword();
-				int connexion = Application.getResultsCmpLogins(pseudo, Application.getShaApp(new String (motPasse)));
-				System.out.println("connexion : "+ connexion);
-				if(connexion == 0) {
-					JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
-					lblPseudoOuMot.setForeground(Color.RED);
-					lblPseudoOuMot.setBounds(327, 300, 253, 14);
-					contentPane.add(lblPseudoOuMot);
-					contentPane.revalidate();
-					contentPane.repaint();
-				}else if (connexion == 1) {
-					User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
-//					deuxiemeFenetre(contentPane,next);
-					IhmMenu menu = new IhmMenu(contentPane, next);
-				}
-				}
-			}
-		);
-		
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				contentPane.removeAll();
-				contentPane.add(new IhmNouvelUtilisateur());
-				contentPane.revalidate();
-				contentPane.repaint();
-//				DefineNouvelUtilisateurFenetre(contentPane);
-				
-			}
-		});
-	}
-	
-	
-	
-	
-
-	/**
 	 * @param fils : fenetre principale qu'on va effacer
 	 * Déclaration de tous les éléments graphique de la fonction nouvelUtilisateur 
 	 */
-	public void DefineNouvelUtilisateurFenetre(JPanel fils){
+	public IhmNouvelUtilisateur(){
+	setBackground(Color.DARK_GRAY);
 		/*Variables*/
 	    int Decalage = 130;
 	    
 	    /*démarrage*/
-	    fils.removeAll();
-	    fils.repaint();
-	    
+//	    fils.removeAll();
+//	    fils.repaint();
+	    this.setBounds(0, 0, 900, 500);
 	    
 	    /*Déclaration et initialisation JLabels*/
+	    this.setLayout(null);
 	    JLabel lblNom = new JLabel("Nom : ");
-	    lblNom.setBounds(10+Decalage, 57, 87, 14);
-	    fils.add(lblNom);
+	    lblNom.setBounds(10+Decalage,57,87,14);
+	    this.add(lblNom);
 	    
 	    JLabel lblPrenom = new JLabel("Prenom : ");
 	    lblPrenom.setBounds(10+Decalage, 100, 87, 14);
-	    fils.add(lblPrenom);
+	    this.add(lblPrenom);
 	    
 	    JLabel lblPseudo = new JLabel("Pseudo : ");
 	    lblPseudo.setBounds(10+Decalage, 135, 87, 14);
-	    fils.add(lblPseudo);
+	    this.add(lblPseudo);
 	    
 	    JLabel lblMetier = new JLabel("metier :");
 	    lblMetier.setBounds(10+Decalage, 169, 46, 14);
-	    contentPane.add(lblMetier);
+	    this.add(lblMetier);
 	    
 	    JLabel lblMotDePasse = new JLabel("Mot de passe : ");
 	    lblMotDePasse.setBounds(10+Decalage, 201, 126, 14);
-	    fils.add(lblMotDePasse);
+	    this.add(lblMotDePasse);
 	    
 	    JLabel lblRetapezLeMot = new JLabel("Retapez le Mot de passe : ");
 	    lblRetapezLeMot.setBounds(10+Decalage, 282, 168, 14);
-	    fils.add(lblRetapezLeMot);
+	    this.add(lblRetapezLeMot);
 	    
 	    
 	    	    
 	    /*Déclaration JTextField*/
 	    textFieldNom = new JTextField();
 	    textFieldNom.setBounds(177+Decalage, 54, 285, 20);
-	    fils.add(textFieldNom);
+	    this.add(textFieldNom);
 	    
 	    textFieldPrenom = new JTextField();
 	    textFieldPrenom.setEnabled(false);
 	    textFieldPrenom.setBounds(177+Decalage, 97, 285, 20);
-	    fils.add(textFieldPrenom);
+	    this.add(textFieldPrenom);
 	    
 	    textFieldPseudo = new JTextField();
 	    textFieldPseudo.setEnabled(false);
 	    textFieldPseudo.setBounds(177+Decalage, 128, 285, 20);
-	    fils.add(textFieldPseudo);
+	    this.add(textFieldPseudo);
 	    
 	    passwordField = new JPasswordField();
 	    passwordField.setEnabled(false);
 	    passwordField.setBounds(177+Decalage, 198, 285, 20);
-	    fils.add(passwordField);
+	    this.add(passwordField);
 	    
 	    passwordField_1 = new JPasswordField();
 	    passwordField_1.setEnabled(false);
 	    passwordField_1.setBounds(177+Decalage, 279, 285, 20);
-	    fils.add(passwordField_1);
+	    this.add(passwordField_1);
 	    
 	    
 	    
 	    /*ProgressBar*/
 	    progressBar = new JProgressBar();
 	    progressBar.setBounds(213+Decalage, 254, 220, 14);
-	    fils.add(progressBar);
+	    this.add(progressBar);
 	    
 	    
 	    
@@ -262,7 +115,7 @@ public class Ihm extends JFrame{
 	    comboBox.setEnabled(false);
 	    comboBox.setBounds(261+Decalage, 167, 109, 20);
 			
-	    fils.add(comboBox);
+	    this.add(comboBox);
 	    comboBox.addItem("");
 	    comboBox.addItem("Technicien");
 	    comboBox.addItem("Autre");
@@ -273,12 +126,12 @@ public class Ihm extends JFrame{
 	    btnRetour_1 = new JButton("Retour");
 	    btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
         btnRetour_1.setBounds(10, 11, 89, 23);
-        fils.add(btnRetour_1);
+        this.add(btnRetour_1);
 	    
 	    btnValider = new JButton("Valider");
 	    btnValider.setEnabled(false);
 	    btnValider.setBounds(278+Decalage, 346, 89, 23);
-	    fils.add(btnValider);
+	    this.add(btnValider);
 	    
 	    
 	    
@@ -286,12 +139,12 @@ public class Ihm extends JFrame{
 	    rdbtnAfficher = new JRadioButton("afficher");
 	    rdbtnAfficher.setEnabled(false);
 	    rdbtnAfficher.setBounds(468+Decalage, 197, 109, 23);
-	    fils.add(rdbtnAfficher);
+	    this.add(rdbtnAfficher);
 	    
 	    chckbxNewCheckBox = new JCheckBox("");
 	    chckbxNewCheckBox.setEnabled(false);
 	    chckbxNewCheckBox.setBounds(468+Decalage, 282, 97, 23);
-	    fils.add(chckbxNewCheckBox);
+	    this.add(chckbxNewCheckBox);
 	    
 	    
 	    
@@ -304,7 +157,7 @@ public class Ihm extends JFrame{
 	    
 	    
 	    /*Appel Des Listenner*/
-	    nouvelUtilisateurLstenner(fils);
+//	    nouvelUtilisateurLstenner(fils);
 	    
 	}
 	
@@ -312,8 +165,8 @@ public class Ihm extends JFrame{
 	 * définis les listenner de DefineNouvelUtilisateurFenetre
 	 * @param fils : JPanel de DefineNouvelUtilisateurFenetre
 	 */
-	public void nouvelUtilisateurLstenner(JPanel fils) {
-		/*Variables*/
+	/*public void nouvelUtilisateurLstenner(JPanel fils) {
+		/*Variables
 	    int Decalage = 130;
 	    
 	    
@@ -486,5 +339,7 @@ public class Ihm extends JFrame{
 				}	
 			}
 		});
-	}
+	}*/
+	
+
 }
