@@ -17,7 +17,7 @@ public class Rdv {
 	private int idAccount;
 
 	/**
-	 * Constructeur de classe
+	 * Constructeur
 	 * @param date
 	 * @param adresse
 	 * @param idRdv
