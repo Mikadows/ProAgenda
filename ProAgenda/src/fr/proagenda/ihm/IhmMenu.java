@@ -54,7 +54,7 @@ public class IhmMenu extends JPanel {
 		add(panelCloseWindow);
 		panelCloseWindow.setLayout(null);
 		
-		JButton btnX = new JButton(new ImageIcon(Ihm.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
+		JButton btnX = new JButton(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/close-window-32.png")));
 		btnX.setBounds(0, 0, 29, 23);
 		panelCloseWindow.add(btnX);
 		btnX.addActionListener(new ActionListener() {
@@ -85,7 +85,7 @@ public class IhmMenu extends JPanel {
         });
 
 		btnRetour = new JButton("Déconnexion");
-		btnRetour.setIcon(new ImageIcon(Ihm.class.getResource("/javax/swing/plaf/metal/icons/ocean/error.png")));
+		btnRetour.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/power-32.png")));
 		btnRetour.setBounds(374,409,142,41);
 		panelMainFenetre.add(btnRetour);
 		
@@ -100,17 +100,17 @@ public class IhmMenu extends JPanel {
 		panelMainFenetre.add(separator);
 		
 		btnVoirLesRendezvous = new JButton("Voir les rendez-vous");
-		btnVoirLesRendezvous.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/DrawHorizontalLine_16x16_JFX.png")));
+		btnVoirLesRendezvous.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/list.png")));
 		btnVoirLesRendezvous.setBounds(346,229,185,23);
 		panelMainFenetre.add(btnVoirLesRendezvous);
 		
 		btnNewButton = new JButton("Modifier Mot de Passe");
-		btnNewButton.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
+		btnNewButton.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/edit.png")));
 		btnNewButton.setBounds(346,283,185,23);
 		panelMainFenetre.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Modifier Identifiant");
-		btnNewButton_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/FontBackgroundColor_16x16_JFX.png")));
+		btnNewButton_1.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/edit.png")));
 		btnNewButton_1.setBounds(346,337,185,23);
 		panelMainFenetre.add(btnNewButton_1);
 		

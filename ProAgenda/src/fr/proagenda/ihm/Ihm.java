@@ -1,6 +1,5 @@
 package fr.proagenda.ihm;
 
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,30 +11,18 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.ListCellRenderer;
-import javax.swing.OverlayLayout;
 import javax.swing.UIManager;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -60,33 +47,24 @@ import java.awt.event.MouseMotionAdapter;
  */
 @SuppressWarnings("serial")
 public class Ihm extends JFrame{
-	private static int height= 900;
-	private static int width = 500; 
+//	private static int height= 900;
+//	private static int width = 500; 
 
 	private JPanel contentPane;
 	private JTextField pseudoField;
-	private JTextField pseudoField_1;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
-	private JMenuBar menuBar_1;
 	private JTextField textFieldNom;
 	private JTextField textFieldPrenom;
 	private JTextField textFieldPseudo;
 	private JRadioButton rdbtnAfficher;
 	private JLabel lblTaillemdp;
 	private JComboBox<String> comboBox;
-	private JComboBox<Object[]> comboBoxObj;
-	private JToggleButton tglbtnRetour;
 	private JButton btnValider;
 	private JCheckBox chckbxNewCheckBox;
 	private JProgressBar progressBar ;
-	private JTable table_1;
-	private Button validBtn;
-	private Button button;
-	private JButton btnRetour;
-	private JButton btnVoirLesRendezvous;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JButton validBtn;
+	private JButton button;
 	private JButton btnRetour_1;
 	
     private int posX;
@@ -235,11 +213,13 @@ public class Ihm extends JFrame{
 //        separator_1.setBounds(232, 107, 420, 2);
 //        contentPane.add(separator_1);
 //		
-		validBtn = new Button("Valider");
-		validBtn.setBounds(279, 276, 70, 22);
+		validBtn = new JButton("Valider");
+		validBtn.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/check-mark-12-16.png")));
+		validBtn.setBounds(266, 276, 95, 22);
 		panelMainFenetre.add(validBtn);
 		
-		button = new Button("Nouvel utilisateur");
+		button = new JButton("Nouvel utilisateur");
+		button.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/add-user-16.png")));
 		button.setBounds(233, 335, 156, 22);
 		panelMainFenetre.add(button);
 		
