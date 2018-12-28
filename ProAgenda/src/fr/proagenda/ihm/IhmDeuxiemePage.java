@@ -31,7 +31,7 @@ public class IhmDeuxiemePage {
         btnRetour_1.setBounds(10, 11, 89, 23);
         btnRetour_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				IhmMenu menu = new IhmMenu(fils, user);
+//				IhmMenu menu = new IhmMenu(fils, user);
 			}
 		});
         fils.add(btnRetour_1);

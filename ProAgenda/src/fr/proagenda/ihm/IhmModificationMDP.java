@@ -31,7 +31,7 @@ public class IhmModificationMDP {
         btnRetour_1.setBounds(10, 11, 89, 23);
         btnRetour_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				IhmMenu menu = new IhmMenu(fils, utilisateur);
+//				IhmMenu menu = new IhmMenu(fils, utilisateur);
 			}
 		});
         fils.add(btnRetour_1);

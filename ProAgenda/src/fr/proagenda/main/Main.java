@@ -15,6 +15,7 @@ public class Main {
 		public void run() {
 			try {
 				Ihm frame = new Ihm();
+				frame.setUndecorated(true);
 				frame.setResizable(false);
 				frame.setVisible(true);
 			} catch (Exception e) {

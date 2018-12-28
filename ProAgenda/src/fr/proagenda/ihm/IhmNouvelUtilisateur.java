@@ -2,7 +2,20 @@ package fr.proagenda.ihm;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,8 +28,17 @@ import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
+import fr.proagenda.application.Application;
+import fr.proagenda.classes.User;
+
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 
 public class IhmNouvelUtilisateur extends JPanel {
 
@@ -33,13 +55,53 @@ private JRadioButton rdbtnAfficher;
 private JCheckBox chckbxNewCheckBox;
 private JLabel lblTaillemdp;
 private JTextField textFieldNom;
+private JPanel panelMainFenetre;
+private int posX;
+private int posY;
 
 /**
 	 * @param fils : fenetre principale qu'on va effacer
 	 * Déclaration de tous les éléments graphique de la fonction nouvelUtilisateur 
 	 */
 	public IhmNouvelUtilisateur(){
-	setBackground(Color.DARK_GRAY);
+	
+	// TOP WINDOW 
+	
+			JPanel panelCloseWindow = new JPanel();
+			panelCloseWindow.setBounds(876, 0, 29, 23);
+			this.add(panelCloseWindow);
+			panelCloseWindow.setLayout(null);
+			
+			JButton btnX = new JButton(new ImageIcon(Ihm.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
+			btnX.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					((Window) getRootPane().getParent()).dispose();
+
+				}
+			});
+			
+			addMouseListener(new MouseAdapter() {
+
+				@Override
+	            //on recupere les coordonnées de la souris
+	            public void mousePressed(MouseEvent e) {
+	                posX = e.getX();    //Position X de la souris au clic
+	                posY = e.getY();    //Position Y de la souris au clic
+	            }
+	        });
+
+			btnX.setVisible(true);
+			panelCloseWindow.add(btnX);
+			btnX.setBounds(0, 0, 23, 23);
+			btnX.setBackground(Color.DARK_GRAY);
+//			panelCloseWindow.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnX}));
+			
+			panelMainFenetre = new JPanel();
+			panelMainFenetre.setBackground(Color.DARK_GRAY);
+			panelMainFenetre.setBounds(0, 0, 900, 522);
+			this.add(panelMainFenetre);
+			panelMainFenetre.setLayout(null);
+
 		/*Variables*/
 	    int Decalage = 130;
 	    
@@ -51,62 +113,68 @@ private JTextField textFieldNom;
 	    /*Déclaration et initialisation JLabels*/
 	    this.setLayout(null);
 	    JLabel lblNom = new JLabel("Nom : ");
+	    lblNom.setForeground(Color.LIGHT_GRAY);
 	    lblNom.setBounds(10+Decalage,57,87,14);
-	    this.add(lblNom);
+	    panelMainFenetre.add(lblNom);
 	    
 	    JLabel lblPrenom = new JLabel("Prenom : ");
+	    lblPrenom.setForeground(Color.LIGHT_GRAY);
 	    lblPrenom.setBounds(10+Decalage, 100, 87, 14);
-	    this.add(lblPrenom);
+	    panelMainFenetre.add(lblPrenom);
 	    
 	    JLabel lblPseudo = new JLabel("Pseudo : ");
+	    lblPseudo.setForeground(Color.LIGHT_GRAY);
 	    lblPseudo.setBounds(10+Decalage, 135, 87, 14);
-	    this.add(lblPseudo);
+	    panelMainFenetre.add(lblPseudo);
 	    
 	    JLabel lblMetier = new JLabel("metier :");
+	    lblMetier.setForeground(Color.LIGHT_GRAY);
 	    lblMetier.setBounds(10+Decalage, 169, 46, 14);
-	    this.add(lblMetier);
+	    panelMainFenetre.add(lblMetier);
 	    
 	    JLabel lblMotDePasse = new JLabel("Mot de passe : ");
+	    lblMotDePasse.setForeground(Color.LIGHT_GRAY);
 	    lblMotDePasse.setBounds(10+Decalage, 201, 126, 14);
-	    this.add(lblMotDePasse);
+	    panelMainFenetre.add(lblMotDePasse);
 	    
 	    JLabel lblRetapezLeMot = new JLabel("Retapez le Mot de passe : ");
+	    lblRetapezLeMot.setForeground(Color.LIGHT_GRAY);
 	    lblRetapezLeMot.setBounds(10+Decalage, 282, 168, 14);
-	    this.add(lblRetapezLeMot);
+	    panelMainFenetre.add(lblRetapezLeMot);
 	    
 	    
 	    	    
 	    /*Déclaration JTextField*/
 	    textFieldNom = new JTextField();
 	    textFieldNom.setBounds(177+Decalage, 54, 285, 20);
-	    this.add(textFieldNom);
+	    panelMainFenetre.add(textFieldNom);
 	    
 	    textFieldPrenom = new JTextField();
 	    textFieldPrenom.setEnabled(false);
 	    textFieldPrenom.setBounds(177+Decalage, 97, 285, 20);
-	    this.add(textFieldPrenom);
+	    panelMainFenetre.add(textFieldPrenom);
 	    
 	    textFieldPseudo = new JTextField();
 	    textFieldPseudo.setEnabled(false);
 	    textFieldPseudo.setBounds(177+Decalage, 128, 285, 20);
-	    this.add(textFieldPseudo);
+	    panelMainFenetre.add(textFieldPseudo);
 	    
 	    passwordField = new JPasswordField();
 	    passwordField.setEnabled(false);
 	    passwordField.setBounds(177+Decalage, 198, 285, 20);
-	    this.add(passwordField);
+	    panelMainFenetre.add(passwordField);
 	    
 	    passwordField_1 = new JPasswordField();
 	    passwordField_1.setEnabled(false);
 	    passwordField_1.setBounds(177+Decalage, 279, 285, 20);
-	    this.add(passwordField_1);
+	    panelMainFenetre.add(passwordField_1);
 	    
 	    
 	    
 	    /*ProgressBar*/
 	    progressBar = new JProgressBar();
 	    progressBar.setBounds(213+Decalage, 254, 220, 14);
-	    this.add(progressBar);
+	    panelMainFenetre.add(progressBar);
 	    
 	    
 	    
@@ -115,7 +183,7 @@ private JTextField textFieldNom;
 	    comboBox.setEnabled(false);
 	    comboBox.setBounds(261+Decalage, 167, 109, 20);
 			
-	    this.add(comboBox);
+	    panelMainFenetre.add(comboBox);
 	    comboBox.addItem("");
 	    comboBox.addItem("Technicien");
 	    comboBox.addItem("Autre");
@@ -126,26 +194,46 @@ private JTextField textFieldNom;
 	    btnRetour_1 = new JButton("Retour");
 	    btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
         btnRetour_1.setBounds(10, 11, 89, 23);
-        this.add(btnRetour_1);
+        panelMainFenetre.add(btnRetour_1);
 	    
 	    btnValider = new JButton("Valider");
 	    btnValider.setEnabled(false);
 	    btnValider.setBounds(278+Decalage, 346, 89, 23);
-	    this.add(btnValider);
+	    panelMainFenetre.add(btnValider);
 	    
 	    
 	    
 	    /*Déclaration checkBox / radioButton*/
 	    rdbtnAfficher = new JRadioButton("afficher");
+	    rdbtnAfficher.setForeground(Color.LIGHT_GRAY);
+	    rdbtnAfficher.setBackground(Color.DARK_GRAY);
 	    rdbtnAfficher.setEnabled(false);
 	    rdbtnAfficher.setBounds(468+Decalage, 197, 109, 23);
-	    this.add(rdbtnAfficher);
+	    panelMainFenetre.add(rdbtnAfficher);
 	    
 	    chckbxNewCheckBox = new JCheckBox("");
+	    chckbxNewCheckBox.setBackground(Color.DARK_GRAY);
+	    chckbxNewCheckBox.setForeground(Color.LIGHT_GRAY);
 	    chckbxNewCheckBox.setEnabled(false);
 	    chckbxNewCheckBox.setBounds(468+Decalage, 282, 97, 23);
-	    this.add(chckbxNewCheckBox);
+	    panelMainFenetre.add(chckbxNewCheckBox);
+	    JPanel panelTopWindow = new JPanel();
 	    
+		    panelTopWindow.addMouseMotionListener(new MouseMotionAdapter() {
+		   // A chaque deplacement on recalcul le positionnement de la fenetre
+		   @Override
+		   public void mouseDragged(MouseEvent e) {
+		       int depX = e.getX() - posX;
+		       int depY = e.getY() - posY;
+		       JFrame topFrame = (JFrame) SwingUtilities.getWindowAncestor(panelMainFenetre);
+               for(int i = 0 ; i < topFrame.getWindows().length ; i++) {
+            	   topFrame.getWindows()[i].setLocation(getX()+depX, getY()+depY);
+               }
+		   }
+		    });
+		    panelTopWindow.setBounds(0, 0, 866, 23);
+		    this.add(panelTopWindow);
+		    panelTopWindow.setLayout(null);
 	    
 	    
 	    /*JLabel "dynamique"*/
@@ -157,7 +245,7 @@ private JTextField textFieldNom;
 	    
 	    
 	    /*Appel Des Listenner*/
-//	    nouvelUtilisateurLstenner(fils);
+	    nouvelUtilisateurLstenner();
 	    
 	}
 	
@@ -165,15 +253,14 @@ private JTextField textFieldNom;
 	 * définis les listenner de DefineNouvelUtilisateurFenetre
 	 * @param fils : JPanel de DefineNouvelUtilisateurFenetre
 	 */
-	/*public void nouvelUtilisateurLstenner(JPanel fils) {
-		/*Variables
+	public void nouvelUtilisateurLstenner() {
+		/*Variables*/
 	    int Decalage = 130;
 	    
 	    
 	    btnRetour_1.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent arg0) {
-
-	            dispose();
+	        	((Window) getRootPane().getParent()).dispose();
 	            Ihm retour=new Ihm();
 	            retour.setVisible(true);
 	        }
@@ -276,12 +363,12 @@ private JTextField textFieldNom;
 	            catch (Exception f){
 	                System.out.println(f.toString());
 	            }
-	            fils.add(lblTaillemdp);
+	            panelMainFenetre.add(lblTaillemdp);
 	            if(passwordField.getCaretPosition()==0) {
-	                fils.remove(lblTaillemdp);
+	                panelMainFenetre.remove(lblTaillemdp);
 	            }
-	            fils.revalidate();
-	            fils.repaint();
+	            panelMainFenetre.revalidate();
+	            panelMainFenetre.repaint();
 	        }
 	    });
 		
@@ -321,7 +408,7 @@ private JTextField textFieldNom;
 						User temp = new User(textFieldNom.getText(),textFieldPrenom.getText(),1,textFieldPseudo.getText(), Application.getShaApp(new String (mdp1)));
 						save = Application.saveUserApp(temp);
 						if(save==1000) {
-							dispose();
+							((Window) getRootPane().getParent()).dispose();
 							Ihm continuer=new Ihm();
 							continuer.setVisible(true);
 						}else if(save==0x003) {
@@ -331,7 +418,7 @@ private JTextField textFieldNom;
 						User temp = new User(textFieldNom.getText(),textFieldPrenom.getText(),0,textFieldPseudo.getText(), Application.getShaApp(new String (mdp1)));
 						save = Application.saveUserApp(temp);
 						if(save==1000) {
-							dispose();
+							((Window) getRootPane().getParent()).dispose();
 							Ihm continuer=new Ihm();
 							continuer.setVisible(true);
 						}
@@ -339,7 +426,7 @@ private JTextField textFieldNom;
 				}	
 			}
 		});
-	}*/
+	}
 	
 
 }

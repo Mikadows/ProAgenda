@@ -37,11 +37,20 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
 import javax.swing.ImageIcon;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
-import fr.proagenda.ihm.IhmMenu;;
+import fr.proagenda.ihm.IhmMenu;
+import fr.proagenda.redefineswing.*;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 
 /**
@@ -80,6 +89,8 @@ public class Ihm extends JFrame{
 	private JButton btnNewButton_1;
 	private JButton btnRetour_1;
 	
+    private int posX;
+	private int posY;
 
 	
 	/**
@@ -89,53 +100,152 @@ public class Ihm extends JFrame{
 	 */
 	public Ihm() {
 		
+		this.setUndecorated(true);
 		try { 
 		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
 		    e.printStackTrace();
 		}
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, height, width);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		setBounds(100, 100, 900, 500);
+		getContentPane().setBackground(Color.WHITE);
+		getContentPane().setLayout(null);
 		
+		// TOP WINDOW 
+		JPanel panelCloseWindow = new JPanel();
+		panelCloseWindow.setBounds(876, 0, 29, 23);
+		getContentPane().add(panelCloseWindow);
+		panelCloseWindow.setLayout(null);
+		
+		JButton btnX = new JButton(new ImageIcon(Ihm.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
+		btnX.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(DISPOSE_ON_CLOSE);
+			}
+		});
+		
+		btnX.setVisible(true);
+		panelCloseWindow.add(btnX);
+		btnX.setBounds(0, 0, 23, 23);
+		btnX.setBackground(Color.DARK_GRAY);
+		panelCloseWindow.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnX}));
+		
+		JPanel panelMainFenetre = new JPanel();
+		panelMainFenetre.setBackground(Color.DARK_GRAY);
+		panelMainFenetre.setBounds(309, 0, 596, 522);
+		getContentPane().add(panelMainFenetre);
+	
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/fond_1.jpeg")));
+		lblNewLabel.setBounds(-5, 0, 320, 500);
+		getContentPane().add(lblNewLabel);
+		panelMainFenetre.setLayout(null);
+		
+		JPanel panelTopWindow = new JPanel();
+		addMouseListener(new MouseAdapter() {
+            @Override
+            //on recupere les coordonnées de la souris
+            public void mousePressed(MouseEvent e) {
+                posX = e.getX();    //Position X de la souris au clic
+                posY = e.getY();    //Position Y de la souris au clic
+            }
+        });
+         
+        panelTopWindow.addMouseMotionListener(new MouseMotionAdapter() {
+            // A chaque deplacement on recalcul le positionnement de la fenetre
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int depX = e.getX() - posX;
+                int depY = e.getY() - posY;
+                for(int i = 0 ; i < getWindows().length; i++) {
+                	getWindows()[i].setLocation(getX()+depX, getY()+depY);
+                }
+            }
+        });
+		panelTopWindow.setBounds(0, 0, 866, 23);
+		getContentPane().add(panelTopWindow);
+		
+		
+		//le reste
 		JLabel lblPseudo = new JLabel("Pseudo : ");
-		lblPseudo.setBounds(288, 158, 71, 14);
-		contentPane.add(lblPseudo);
+		lblPseudo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPseudo.setForeground(Color.LIGHT_GRAY);
+		lblPseudo.setBounds(81, 151, 82, 14);
+		panelMainFenetre.add(lblPseudo);
 		
 		JLabel lblMotDePasse = new JLabel("Mot de passe :");
-		lblMotDePasse.setBounds(257, 202, 102, 14);
-		contentPane.add(lblMotDePasse);
+		lblMotDePasse.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblMotDePasse.setForeground(Color.LIGHT_GRAY);
+		lblMotDePasse.setBounds(74, 219, 89, 14);
+		panelMainFenetre.add(lblMotDePasse);
 		
-		pseudoField = new JTextField();
-		pseudoField.setBounds(374, 158, 156, 20);
-		contentPane.add(pseudoField);
-		pseudoField.setColumns(10);
+//		pseudoField = new JTextField();
+//		pseudoField.setBounds(210, 148, 199, 20);
+//		panelMainFenetre.add(pseudoField);
+//		pseudoField.setColumns(10);
+		pseudoField = new JTextField(20) {
+			  @Override protected void paintComponent(Graphics g) {
+			    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+			      Graphics2D g2 = (Graphics2D) g.create();
+			      g2.setPaint(getBackground());
+			      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+			          0, 0, getWidth() - 1, getHeight() - 1));
+			      g2.dispose();
+			    }
+			    super.paintComponent(g);
+			  }
+			  @Override public void updateUI() {
+			    super.updateUI();
+			    setOpaque(false);
+			    setBorder(new RoundedCornerBorder());
+			  }
+			};
+			pseudoField.setBounds(210,148,199,20);
+			panelMainFenetre.add(pseudoField);
 		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(374, 202, 156, 20);
-		contentPane.add(passwordField);
 		
-		JLabel lblProagenda = new JLabel("ProAgenda");
-        lblProagenda.setFont(new Font("Tahoma", Font.PLAIN, 70));
-        lblProagenda.setBounds(282, 11, 340, 85);
-        contentPane.add(lblProagenda);
-        
-        JSeparator separator_1 = new JSeparator();
-        separator_1.setBounds(232, 107, 420, 2);
-        contentPane.add(separator_1);
+		passwordField = new JPasswordField() {
+		 @Override protected void paintComponent(Graphics g) {
+			    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+			      Graphics2D g2 = (Graphics2D) g.create();
+			      g2.setPaint(getBackground());
+			      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+			          0, 0, getWidth() - 1, getHeight() - 1));
+			      g2.dispose();
+			    }
+			    super.paintComponent(g);
+			  }
+			  @Override public void updateUI() {
+			    super.updateUI();
+			    setOpaque(false);
+			    setBorder(new RoundedCornerBorder());
+			  }
+			};
 		
+		passwordField.setBounds(210, 216, 199, 20);
+		panelMainFenetre.add(passwordField);
+//		
+//		JLabel lblProagenda = new JLabel("ProAgenda");
+//        lblProagenda.setFont(new Font("Tahoma", Font.PLAIN, 70));
+//        lblProagenda.setBounds(282, 11, 340, 85);
+//        contentPane.add(lblProagenda);
+//        
+//        JSeparator separator_1 = new JSeparator();
+//        separator_1.setBounds(232, 107, 420, 2);
+//        contentPane.add(separator_1);
+//		
 		validBtn = new Button("Valider");
-		validBtn.setBounds(412, 255, 70, 22);
-		contentPane.add(validBtn);
+		validBtn.setBounds(279, 276, 70, 22);
+		panelMainFenetre.add(validBtn);
 		
 		button = new Button("Nouvel utilisateur");
-		button.setBounds(374, 338, 156, 22);
-		contentPane.add(button);
+		button.setBounds(233, 335, 156, 22);
+		panelMainFenetre.add(button);
 		
-		listenerIHM(contentPane);
+		
+//		
+		listenerIHM();
 		
 		
 	}
@@ -144,7 +254,7 @@ public class Ihm extends JFrame{
 	 * Contient tous les listener du constructeur Ihm()
 	 * listener fenetre principale
 	 */
-	public void listenerIHM(JPanel fils) {
+	public void listenerIHM() {
 		validBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String pseudo = pseudoField.getText();
@@ -160,19 +270,109 @@ public class Ihm extends JFrame{
 					contentPane.repaint();
 				}else if (connexion == 1) {
 					User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
-//					deuxiemeFenetre(contentPane,next);
-					IhmMenu menu = new IhmMenu(contentPane, next);
+					getContentPane().removeAll();
+					getContentPane().add(new IhmMenu(next));
+					getContentPane().revalidate();
+					getContentPane().repaint();
+
+
 				}
 				}
 			}
 		);
 		
+		passwordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER){
+					String pseudo = pseudoField.getText();
+					char []motPasse = passwordField.getPassword();
+					int connexion = Application.getResultsCmpLogins(pseudo, Application.getShaApp(new String (motPasse)));
+					System.out.println("connexion : "+ connexion);
+					if(connexion == 0) {
+						JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
+						lblPseudoOuMot.setForeground(Color.RED);
+						lblPseudoOuMot.setBounds(327, 300, 253, 14);
+						contentPane.add(lblPseudoOuMot);
+						contentPane.revalidate();
+						contentPane.repaint();
+					}else if (connexion == 1) {
+						User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
+						getContentPane().removeAll();
+						getContentPane().add(new IhmMenu(next));
+						getContentPane().revalidate();
+						getContentPane().repaint();
+
+
+					}
+				 }
+			}
+		});
+		
+		pseudoField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER){
+					String pseudo = pseudoField.getText();
+					char []motPasse = passwordField.getPassword();
+					int connexion = Application.getResultsCmpLogins(pseudo, Application.getShaApp(new String (motPasse)));
+					System.out.println("connexion : "+ connexion);
+					if(connexion == 0) {
+						JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
+						lblPseudoOuMot.setForeground(Color.RED);
+						lblPseudoOuMot.setBounds(327, 300, 253, 14);
+						contentPane.add(lblPseudoOuMot);
+						contentPane.revalidate();
+						contentPane.repaint();
+					}else if (connexion == 1) {
+						User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
+						getContentPane().removeAll();
+						getContentPane().add(new IhmMenu(next));
+						getContentPane().revalidate();
+						getContentPane().repaint();
+
+
+					}
+				 }
+			}
+		});
+		
+		validBtn.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER){
+					String pseudo = pseudoField.getText();
+					char []motPasse = passwordField.getPassword();
+					int connexion = Application.getResultsCmpLogins(pseudo, Application.getShaApp(new String (motPasse)));
+					System.out.println("connexion : "+ connexion);
+					if(connexion == 0) {
+						JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
+						lblPseudoOuMot.setForeground(Color.RED);
+						lblPseudoOuMot.setBounds(327, 300, 253, 14);
+						contentPane.add(lblPseudoOuMot);
+						contentPane.revalidate();
+						contentPane.repaint();
+					}else if (connexion == 1) {
+						User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
+						getContentPane().removeAll();
+						getContentPane().add(new IhmMenu(next));
+						getContentPane().revalidate();
+						getContentPane().repaint();
+
+
+					}
+				 }
+			}
+		});
+		
+		
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				contentPane.removeAll();
-				contentPane.add(new IhmNouvelUtilisateur());
-				contentPane.revalidate();
-				contentPane.repaint();
+				getContentPane().removeAll();
+				getContentPane().add(new IhmNouvelUtilisateur());
+//				new IhmNouvelUtilisateur(getContentPane());
+				getContentPane().revalidate();
+				getContentPane().repaint();
 //				DefineNouvelUtilisateurFenetre(contentPane);
 				
 			}
