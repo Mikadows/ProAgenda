@@ -76,7 +76,8 @@ public class Ihm extends JFrame{
 	 * @return 
 	 * TODO modifier le passage de l'utilisateur entre les fonctions : User --> int ID  
 	 */
-	public Ihm() {
+	public Ihm() {	
+		int font = Application.getRandomNumber();
 		
 		this.setUndecorated(true);
 		try { 
@@ -113,9 +114,9 @@ public class Ihm extends JFrame{
 		panelMainFenetre.setBackground(Color.DARK_GRAY);
 		panelMainFenetre.setBounds(309, 0, 596, 522);
 		getContentPane().add(panelMainFenetre);
-	
+		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/fond_1.jpeg")));
+		lblNewLabel.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/fond_"+font+".jpeg")));
 		lblNewLabel.setBounds(-5, 0, 320, 500);
 		getContentPane().add(lblNewLabel);
 		panelMainFenetre.setLayout(null);

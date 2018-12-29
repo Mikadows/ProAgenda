@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import fr.proagenda.dao.Dao;
 import fr.proagenda.dao.DaoRetNomPrenom;
@@ -143,6 +144,16 @@ public class Application {
 	 */
 	public static ArrayList<Rdv> getListRdvByIdAccount(int idAccount){
 		return DaoRetRDV.getRdvByIdAccount(idAccount);
+	}
+	
+	/**
+	 * Retourne un nombre aléatoire entre 1 1et 6
+	 * @return
+	 */
+	public static int getRandomNumber() {
+		Random rand = new Random();
+		int n = rand.nextInt(6) + 1;	//6 is the maximum and the 1 is our minimum.
+		return n;
 	}
 	
 }
