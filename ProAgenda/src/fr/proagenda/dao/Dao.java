@@ -202,4 +202,62 @@ public class Dao {
 		return ret;		
 	}
 	
+	/**
+	 * Retourne un user complet après l'identification
+	 * @param u
+	 * @return
+	 */
+	public static User retAllDataByUser(User u) {
+		User u1 = null;
+		
+		try {
+
+			// Etape 1 : Chargement du driver
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			}catch(ClassNotFoundException err){
+				System.err.println("Pilote non trouvé..");
+				System.err.println(err);
+				//     System.exit(1) ;
+			}
+
+			// Etape 2 : récupération de la connexion
+			try {
+				cn = DriverManager.getConnection(url, login, passwd);
+			}catch(SQLException err) {
+				System.err.println("Connexion impossible");
+				System.err.println(err);
+				//System.exit(1) ;
+			}
+
+			// Etape 3 : Création d'un statement
+			st = cn.createStatement();
+
+			String sql = "SELECT * FROM t_account WHERE login_account=\""+u.getPseudo()+"\"";
+
+			// Etape 4 : exécution requête
+			rs = st.executeQuery(sql);
+
+			// Si récup données alors étapes 5 (parcours Resultset)
+			while(rs.next()) {
+				User ret = new User(rs.getString("nom_account"), rs.getString("prenom_account"), rs.getInt("id_job"), rs.getInt("id_account"), rs.getString("login_account"), rs.getString("mdp_account"));
+				System.out.println(ret.getId_metier());
+				u1 = ret;				
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+			// Etape 6 : libérer ressources de la mémoire.
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return u1;
+	}
+	
 }

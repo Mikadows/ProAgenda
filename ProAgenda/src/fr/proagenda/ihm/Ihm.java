@@ -204,16 +204,16 @@ public class Ihm extends JFrame{
 		
 		passwordField.setBounds(210, 216, 199, 20);
 		panelMainFenetre.add(passwordField);
-//		
+
 //		JLabel lblProagenda = new JLabel("ProAgenda");
-//        lblProagenda.setFont(new Font("Tahoma", Font.PLAIN, 70));
-//        lblProagenda.setBounds(282, 11, 340, 85);
-//        contentPane.add(lblProagenda);
-//        
-//        JSeparator separator_1 = new JSeparator();
-//        separator_1.setBounds(232, 107, 420, 2);
-//        contentPane.add(separator_1);
-//		
+//      lblProagenda.setFont(new Font("Tahoma", Font.PLAIN, 70));
+//      lblProagenda.setBounds(282, 11, 340, 85);
+//      contentPane.add(lblProagenda);
+//
+//      JSeparator separator_1 = new JSeparator();
+//      separator_1.setBounds(232, 107, 420, 2);
+//      contentPane.add(separator_1);
+
 		validBtn = new JButton("Valider");
 		validBtn.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/check-mark-12-16.png")));
 		validBtn.setBounds(266, 276, 95, 22);
@@ -251,13 +251,20 @@ public class Ihm extends JFrame{
 					contentPane.repaint();
 				}else if (connexion == 1) {
 					User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
-					getContentPane().removeAll();
-					getContentPane().add(new IhmMenu(next));
-					getContentPane().revalidate();
-					getContentPane().repaint();
+					next = Application.getDataUserByUser(next);
+					System.out.println("oooooo");
+					if(next.getId_metier() == 1) {
+						System.out.println("Technicien");
+						getContentPane().removeAll();
+						getContentPane().add(new IhmMenu(next));
+						getContentPane().revalidate();
+						getContentPane().repaint();
 
+					}else if(next.getId_metier() == 0){
+						System.out.println("Patron");
+					}
 
-				}
+					}
 				}
 			}
 		);
@@ -279,10 +286,18 @@ public class Ihm extends JFrame{
 						contentPane.repaint();
 					}else if (connexion == 1) {
 						User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
-						getContentPane().removeAll();
-						getContentPane().add(new IhmMenu(next));
-						getContentPane().revalidate();
-						getContentPane().repaint();
+						next = Application.getDataUserByUser(next);
+						System.out.println("oooooo");
+						if(next.getId_metier() == 1) {
+							System.out.println("Technicien");
+							getContentPane().removeAll();
+							getContentPane().add(new IhmMenu(next));
+							getContentPane().revalidate();
+							getContentPane().repaint();
+
+						}else if(next.getId_metier() == 0){
+							System.out.println("Patron");
+						}
 
 
 					}

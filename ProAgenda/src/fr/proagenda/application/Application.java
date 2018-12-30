@@ -156,4 +156,13 @@ public class Application {
 		return n;
 	}
 	
+	/**
+	 * Retourne un user complet après l'identification
+	 * @param u
+	 * @return
+	 */
+	public static User getDataUserByUser(User u) {
+		return Dao.retAllDataByUser(u);
+	}
+	
 }
