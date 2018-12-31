@@ -18,6 +18,7 @@ public class IhmChoixTechnicien {
 	 * @param id_account : Int ID du technicien a voir les rendez vous 
 	 * TODO Fonction de découpage de la date et l'heure 
 	 */
+	@SuppressWarnings("serial")
 	public IhmChoixTechnicien(JPanel fils,int id_account) {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(250, 70, 400, 200);

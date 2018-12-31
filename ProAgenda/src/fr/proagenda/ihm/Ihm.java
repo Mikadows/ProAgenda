@@ -262,6 +262,10 @@ public class Ihm extends JFrame{
 
 					}else if(next.getId_metier() == 0){
 						System.out.println("Patron");
+						getContentPane().removeAll();
+						getContentPane().add(new IhmMenuPatron(next));
+						getContentPane().revalidate();
+						getContentPane().repaint();
 					}
 
 					}
@@ -297,6 +301,10 @@ public class Ihm extends JFrame{
 
 						}else if(next.getId_metier() == 0){
 							System.out.println("Patron");
+							getContentPane().removeAll();
+							getContentPane().add(new IhmMenuPatron(next));
+							getContentPane().revalidate();
+							getContentPane().repaint();
 						}
 
 

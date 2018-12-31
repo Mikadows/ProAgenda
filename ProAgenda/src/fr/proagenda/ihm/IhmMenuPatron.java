@@ -21,7 +21,8 @@ import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
 
 @SuppressWarnings("serial")
-public class IhmMenu extends JPanel {
+public class IhmMenuPatron extends JPanel {
+
 	
 	private JButton btnRetour;
 	private JButton btnVoirLesRendezvous;
@@ -42,7 +43,7 @@ public class IhmMenu extends JPanel {
 	 * @param fils : fenetre initiante 
 	 * @param user : User contenant les informations de l'utilisateur 
 	 */
-	public IhmMenu(User user) {
+	public IhmMenuPatron(User user) {
 		int font = Application.getRandomNumber();
 		
 		this.setBounds(0, 0, 900, 500);
@@ -86,17 +87,17 @@ public class IhmMenu extends JPanel {
 
 		btnRetour = new JButton("Déconnexion");
 		btnRetour.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/power-32.png")));
-		btnRetour.setBounds(558,408,142,41);
+		btnRetour.setBounds(558,445,142,41);
 		panelMainFenetre.add(btnRetour);
 		
-		lblMenu = new JLabel("Menu Technicien");
+		lblMenu = new JLabel("Menu Patron");
 		lblMenu.setForeground(Color.LIGHT_GRAY);
 		lblMenu.setFont(new Font("Tahoma", Font.ITALIC, 50));
-		lblMenu.setBounds(450,107,390,75);
+		lblMenu.setBounds(477,107,295,75);
 		panelMainFenetre.add(lblMenu);
 		
 		separator = new JSeparator();
-		separator.setBounds(450,180,377,2);
+		separator.setBounds(477,180,295,2);
 		panelMainFenetre.add(separator);
 		
 		btnVoirLesRendezvous = new JButton("Voir les rendez-vous");
@@ -106,12 +107,12 @@ public class IhmMenu extends JPanel {
 		
 		btnNewButton = new JButton("Modifier Mot de Passe");
 		btnNewButton.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/edit.png")));
-		btnNewButton.setBounds(531,281,185,23);
+		btnNewButton.setBounds(531,339,185,23);
 		panelMainFenetre.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Modifier Identifiant");
 		btnNewButton_1.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/edit.png")));
-		btnNewButton_1.setBounds(531,336,185,23);
+		btnNewButton_1.setBounds(531,384,185,23);
 		panelMainFenetre.add(btnNewButton_1);
 		
 		lblProagenda = new JLabel("ProAgenda");
@@ -128,6 +129,15 @@ public class IhmMenu extends JPanel {
 		label.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/fond_"+font+".jpeg")));
 		label.setBounds(-5, 0, 320, 500);
 		panelMainFenetre.add(label);
+		
+		JButton button = new JButton("Ajouter des rendez-vous");
+		button.setIcon(new ImageIcon(IhmMenuPatron.class.getResource("/fr/proagenda/img/add-file-16.png")));
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(531, 271, 185, 23);
+		panelMainFenetre.add(button);
 				
 				
 		JPanel panelTopWindow = new JPanel();

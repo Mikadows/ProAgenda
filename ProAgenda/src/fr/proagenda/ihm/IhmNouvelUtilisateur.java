@@ -1,7 +1,5 @@
 package fr.proagenda.ihm;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,17 +27,13 @@ import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
 
+@SuppressWarnings("serial")
 public class IhmNouvelUtilisateur extends JPanel {
 
 
@@ -221,7 +215,8 @@ private int posY;
 	    
 		    panelTopWindow.addMouseMotionListener(new MouseMotionAdapter() {
 		   // A chaque deplacement on recalcul le positionnement de la fenetre
-		   @Override
+		   @SuppressWarnings("static-access")
+		@Override
 		   public void mouseDragged(MouseEvent e) {
 		       int depX = e.getX() - posX;
 		       int depY = e.getY() - posY;
