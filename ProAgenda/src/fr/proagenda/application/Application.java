@@ -126,12 +126,8 @@ public class Application {
 	public int retIDCompteWithName(String nomPrenom, ArrayList<User> users) {
 		int valID=-1;
 		for(int i = 0; i < users.size(); i++) {
-//			System.out.println("utilisateur 1 : "+ nomPrenom);
-//			System.out.println("utilisateur 2 : "+ users.get(i).getNom()+" "+ users.get(i).getPrenom());
 			if(nomPrenom.equals(users.get(i).getNom()+" "+users.get(i).getPrenom())) {
-//				System.out.println("OUI TES BON MON GARS" );
 				valID=users.get(i).getIdCompte();
-//				System.out.println("valID : "+ valID);
 			}
 		}
 		return valID;

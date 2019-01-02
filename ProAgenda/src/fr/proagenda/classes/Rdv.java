@@ -35,6 +35,18 @@ public class Rdv {
 		this.idAccount = idAccount;
 	}
 	
+	public Rdv(Date date, String adresse) {
+		SimpleDateFormat formater = null;
+		
+		formater = new SimpleDateFormat("dd-MM-yy");
+		this.date = formater.format(date);
+		formater = new SimpleDateFormat("hh:mm:ss");
+		this.heure = formater.format(date);
+		this.adresse = adresse;
+		this.idRdv = 0;
+		this.idAccount = 0;
+	}
+	
 	public String getHeure() {
 		return heure;
 	}

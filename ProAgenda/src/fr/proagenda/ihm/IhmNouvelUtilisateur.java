@@ -1,5 +1,5 @@
 package fr.proagenda.ihm;
-
+ 
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,7 +66,7 @@ private int posY;
 			this.add(panelCloseWindow);
 			panelCloseWindow.setLayout(null);
 			
-			JButton btnX = new JButton(new ImageIcon(Ihm.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
+			JButton btnX = new JButton(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/close-window-32.png")));
 			btnX.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					((Window) getRootPane().getParent()).dispose();
@@ -195,7 +195,7 @@ private int posY;
 	    btnValider.setBounds(278+Decalage, 346, 89, 23);
 	    panelMainFenetre.add(btnValider);
 	    
-	    
+	     
 	    
 	    /*Déclaration checkBox / radioButton*/
 	    rdbtnAfficher = new JRadioButton("afficher");

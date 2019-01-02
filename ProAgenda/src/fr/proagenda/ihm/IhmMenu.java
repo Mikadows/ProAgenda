@@ -1,5 +1,5 @@
 package fr.proagenda.ihm;
-
+ 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window;
@@ -152,10 +152,10 @@ public class IhmMenu extends JPanel {
 		this.revalidate();
 		this.repaint();
 		listenerIhmMenu( user);
-	}
+	} 
 	
 	/**
-	 * Contient tous les listener menuDeLaMortQuiTue(JPanel fils, User user)
+	 * Contient tous  les listener menuDeLaMortQuiTue(JPanel fils, User user)
 	 * @param fils : JPannel de la fenetre précédente 
 	 * @param user : utilisateur en cours d'utilisation
 	 */
@@ -170,7 +170,10 @@ public class IhmMenu extends JPanel {
 		
 		btnVoirLesRendezvous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				IhmDeuxiemePage nextPage = new IhmDeuxiemePage(fils, user);
+				removeAll();
+				add(new IhmDeuxiemePage(user));
+				revalidate();
+				repaint();
 			}
 		});
 		
