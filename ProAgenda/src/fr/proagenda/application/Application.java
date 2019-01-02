@@ -33,6 +33,10 @@ public class Application {
 		Dao.modifierPseudoDao(pseudo, utilisateur);
 	}
 	
+	public static void modifMdpApp(String mdp, User utilisateur) {
+		Dao.modifierMDPDao(mdp, utilisateur);
+	}
+	
 	/**
 	 * Retourne le résultat de la query en Dao
 	 * @param loginT
