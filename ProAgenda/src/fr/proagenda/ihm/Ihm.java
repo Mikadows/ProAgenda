@@ -314,7 +314,7 @@ public class Ihm extends JFrame{
 							getContentPane().repaint();
 						}
 
-
+  
 					}
 				 }
 			}

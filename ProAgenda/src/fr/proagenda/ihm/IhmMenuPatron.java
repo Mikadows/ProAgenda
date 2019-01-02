@@ -1,5 +1,5 @@
 package fr.proagenda.ihm;
-
+ 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Window;
@@ -177,7 +177,7 @@ public class IhmMenuPatron extends JPanel {
 				continuer.setVisible(true);	
 			}
 		});
-		
+		 
 		btnVoirLesRendezvous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeAll();

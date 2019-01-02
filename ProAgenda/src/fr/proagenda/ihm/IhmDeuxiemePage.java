@@ -114,7 +114,7 @@ public class IhmDeuxiemePage extends JPanel {
 //				afficheRDV(fils, app.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
 			}
 		});
-        
+         
         JPanel panelTopWindow = new JPanel();
 	    
 	    panelTopWindow.addMouseMotionListener(new MouseMotionAdapter() {

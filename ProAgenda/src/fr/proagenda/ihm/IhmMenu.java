@@ -152,10 +152,10 @@ public class IhmMenu extends JPanel {
 		this.revalidate();
 		this.repaint();
 		listenerIhmMenu( user);
-	}
+	} 
 	
 	/**
-	 * Contient tous les listener menuDeLaMortQuiTue(JPanel fils, User user)
+	 * Contient tous  les listener menuDeLaMortQuiTue(JPanel fils, User user)
 	 * @param fils : JPannel de la fenetre précédente 
 	 * @param user : utilisateur en cours d'utilisation
 	 */

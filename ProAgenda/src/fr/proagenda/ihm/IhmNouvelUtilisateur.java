@@ -195,7 +195,7 @@ private int posY;
 	    btnValider.setBounds(278+Decalage, 346, 89, 23);
 	    panelMainFenetre.add(btnValider);
 	    
-	    
+	     
 	    
 	    /*Déclaration checkBox / radioButton*/
 	    rdbtnAfficher = new JRadioButton("afficher");
