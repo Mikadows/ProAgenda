@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
-
+ 
 @SuppressWarnings("serial")
 public class IhmMenuPatron extends JPanel {
 

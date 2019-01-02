@@ -27,7 +27,7 @@ public class IhmDeuxiemePage extends JPanel {
 	protected int posX;
 	protected int posY;
 	private JPanel panelMainFenetre;
-
+ 
 	/**
 	 * fenetre affichant de le choix du technicien pour voir ses rendez vous 
 	 * @param fils : JPannel de la fenetre précédente
