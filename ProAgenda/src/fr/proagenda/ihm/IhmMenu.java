@@ -170,7 +170,10 @@ public class IhmMenu extends JPanel {
 		
 		btnVoirLesRendezvous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-//				IhmDeuxiemePage nextPage = new IhmDeuxiemePage(fils, user);
+				removeAll();
+				add(new IhmDeuxiemePage(user));
+				revalidate();
+				repaint();
 			}
 		});
 		

@@ -1,5 +1,6 @@
 package fr.proagenda.ihm;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -9,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import fr.proagenda.application.Application;
 
-public class IhmChoixTechnicien {
+public class IhmChoixTechnicien extends JScrollPane{
 	private JTable table_1;
 
 	/**
@@ -19,13 +20,12 @@ public class IhmChoixTechnicien {
 	 * TODO Fonction de découpage de la date et l'heure 
 	 */
 	@SuppressWarnings("serial")
-	public IhmChoixTechnicien(JPanel fils,int id_account) {
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(250, 70, 400, 200);
-		fils.add(scrollPane);
-	 
+	public IhmChoixTechnicien(int id_account){
+
+		this.setBounds(250, 70, 400, 200);
 			      
 	    table_1 = new JTable();
+	    table_1.setBackground(Color.GRAY);
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -47,10 +47,13 @@ public class IhmChoixTechnicien {
 		ArrayList<String> test = app.ihmToDAOGetRdv(id_account);
 		
 		DefaultTableModel dtm = (DefaultTableModel) table_1.getModel();
-		for(int i = 0; i < test.size(); i+=4 ) {
-				dtm.addRow(new Object[] {test.get(i),test.get(i+1),test.get(i+2),test.get(i+3)});
-		} 		 
-		scrollPane.setViewportView(table_1);
+		
+		if(!test.isEmpty()) {
+			for(int i = 0; i < test.size(); i+=4 ) {
+					dtm.addRow(new Object[] {test.get(i),test.get(i+1),test.get(i+2),test.get(i+3)});
+			} 
+		}else {}
+		this.setViewportView(table_1);
 	}
 
 }

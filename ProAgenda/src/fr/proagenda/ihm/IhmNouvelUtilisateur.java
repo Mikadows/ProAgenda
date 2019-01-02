@@ -66,7 +66,7 @@ private int posY;
 			this.add(panelCloseWindow);
 			panelCloseWindow.setLayout(null);
 			
-			JButton btnX = new JButton(new ImageIcon(Ihm.class.getResource("/com/sun/java/swing/plaf/windows/icons/Error.gif")));
+			JButton btnX = new JButton(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/close-window-32.png")));
 			btnX.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					((Window) getRootPane().getParent()).dispose();
