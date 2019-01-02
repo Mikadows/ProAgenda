@@ -11,24 +11,24 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
 
-public class IhmModificationPseudoTechnicien extends JPanel {
-	private JTextField pseudoField;
-	private JTextField pseudoField_1;
+public class IhmModificationMDPTechnicien extends JPanel {
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
 	private JPanel panelMainFenetre;
-	protected int posY;
 	protected int posX;
+	protected int posY;
 
-	/** 
-	 * affichage de la modification du pseudo
+	/**
+	 * affichage des champs pour modifier le mot de passe 
 	 * @param fils : JPannel de la fenetre précédente
 	 * @param utilisateur : User utilisateur en cours 
 	 */
-	protected IhmModificationPseudoTechnicien(User utilisateur) {
+	protected IhmModificationMDPTechnicien(User utilisateur) {
 		int font = Application.getRandomNumber();
 		this.setBounds(0, 0, 900, 500);
 		setLayout(null);
@@ -67,6 +67,7 @@ public class IhmModificationPseudoTechnicien extends JPanel {
                 posY = e.getY();    //Position Y de la souris au clic
             }
         });
+
 		JButton btnRetour_1 = new JButton("Retour");
 		
         btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
@@ -81,38 +82,37 @@ public class IhmModificationPseudoTechnicien extends JPanel {
 		});
         panelMainFenetre.add(btnRetour_1);
 		
-		JLabel lblModifierPseudo = new JLabel("nouveau Pseudo : ");
-		lblModifierPseudo.setForeground(Color.LIGHT_GRAY);
-		lblModifierPseudo.setBounds(358, 127, 356, 14);
-		panelMainFenetre.add(lblModifierPseudo);
+		JLabel lblModifierMotDe = new JLabel("nouveau mot de passe : ");
+		lblModifierMotDe.setForeground(Color.LIGHT_GRAY);
+		lblModifierMotDe.setBounds(355, 127, 356, 14);
+		panelMainFenetre.add(lblModifierMotDe);
 		
-		pseudoField = new JTextField();
-		pseudoField.setBounds(520, 124, 339, 20);
-		panelMainFenetre.add(pseudoField);
+		passwordField = new JPasswordField();
+		passwordField.setBounds(517, 124, 339, 20);
+		panelMainFenetre.add(passwordField);
 		
 		JLabel lblTapezLe = new JLabel("tapez le \u00E0 nouveau : ");
 		lblTapezLe.setForeground(Color.LIGHT_GRAY);
-		lblTapezLe.setBounds(358, 185, 356, 14);
+		lblTapezLe.setBounds(355, 185, 356, 14);
 		panelMainFenetre.add(lblTapezLe);
 		
-		pseudoField_1 = new JTextField();
-		pseudoField_1.setBounds(520, 182, 339, 20);
-		panelMainFenetre.add(pseudoField_1);
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(517, 182, 339, 20);
+		panelMainFenetre.add(passwordField_1);
 		
 		JButton btnValider = new JButton("Valider");
-		btnValider.setBounds(640, 248, 89, 23);
+		btnValider.setBounds(636, 248, 89, 23);
 		panelMainFenetre.add(btnValider);
 		
 		btnValider.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String pseudo1 = pseudoField.getText();
-				String pseudo2 = pseudoField_1.getText();
-				System.out.println("pseudo 1 : "+new String (pseudo1)+"   pseudo 2 : "+new String (pseudo2));
-				if(pseudo1.equals(pseudo2)) {
-					utilisateur.setPseudo(pseudo1);
-					Application.modifPseudoApp(pseudo1, utilisateur);
+				char []mdp1 = passwordField.getPassword();
+				char []mdp2 = passwordField_1.getPassword();
+				System.out.println("mdp 1 : "+new String (mdp1)+"   mdp 2 : "+new String (mdp2));
+				if(Application.getShaApp(new String (mdp1)).equals(Application.getShaApp(new String (mdp2)))) {
+					Application.modifMdpApp(Application.getShaApp(new String (mdp1)),utilisateur);
 					removeAll();
 					add(new IhmMenu(utilisateur));
 					revalidate();
@@ -129,5 +129,5 @@ public class IhmModificationPseudoTechnicien extends JPanel {
 		revalidate();
 		repaint();
 	}
-
+	
 }

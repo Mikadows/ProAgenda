@@ -171,7 +171,7 @@ public class IhmMenu extends JPanel {
 		btnVoirLesRendezvous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeAll();
-				add(new IhmDeuxiemePage(user));
+				add(new IhmDeuxiemePageTechnicien(user));
 				revalidate();
 				repaint();
 			}
@@ -180,12 +180,20 @@ public class IhmMenu extends JPanel {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				IhmModificationMDP mdp = new IhmModificationMDP(fils, user);
+				removeAll();
+				add(new IhmModificationMDPTechnicien(user));
+				revalidate();
+				repaint();
 			}
 		});
 		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				IhmModificationPseudo pseudo = new IhmModificationPseudo(fils, user);
+				removeAll();
+				add(new IhmModificationPseudoTechnicien(user));
+				revalidate();
+				repaint();
 			}
 		});
 	}

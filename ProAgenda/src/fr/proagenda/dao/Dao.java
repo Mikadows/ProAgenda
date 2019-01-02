@@ -143,7 +143,50 @@ public class Dao {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void modifierMDPDao(String mdp, User utilisateur) {
+		
 
+		// Etape 1 : Chargement du driver
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException err){
+			System.err.println("Pilote non trouvé..");
+			System.err.println(err);
+			System.exit(1) ;
+		}
+
+		// Etape 2 : récupération de la connexion
+		try {
+			cn = DriverManager.getConnection(url, login, passwd);
+		}catch(SQLException err) {
+			System.err.println("Connexion impossible");
+			System.err.println(err);
+			System.exit(1) ;
+		}
+
+		// Etape 3 : Création d'un statement
+		try {
+			pstmt = cn.prepareStatement("UPDATE t_account SET mdp_account = ? WHERE login_account=?");
+			pstmt.setString(1, mdp);
+			pstmt.setString(2, utilisateur.getPseudo());
+			pstmt.executeUpdate();
+		}catch (Exception e){
+			System.err.println("requete non effectuee");
+			System.err.println(e);
+			System.exit(1);
+		}
+
+
+	try {
+	// Etape 6 : libérer ressources de la mémoire.
+		cn.close();
+		pstmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
+	
 	/**
 	 * Sauvegarde un utilisateur 
 	 * @param user
