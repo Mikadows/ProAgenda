@@ -21,9 +21,9 @@ public class IhmChoixTechnicien extends JScrollPane{
 	 */
 	@SuppressWarnings("serial")
 	public IhmChoixTechnicien(int id_account){
- //TOCHECK 
+ 
 		this.setBounds(250, 70, 400, 200);
-			       
+			      
 	    table_1 = new JTable();
 	    table_1.setBackground(Color.GRAY);
 		table_1.setModel(new DefaultTableModel(

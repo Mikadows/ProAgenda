@@ -56,4 +56,16 @@ public class User {
 	public String getEncryptedPassword() {
 		return encryptedPassword;
 	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
+	public void setEncryptedPassword(String encryptedPassword) {
+		this.encryptedPassword = encryptedPassword;
+	}
+	
+	
+	
+	
 }

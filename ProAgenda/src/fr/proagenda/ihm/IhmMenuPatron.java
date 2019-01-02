@@ -196,6 +196,10 @@ public class IhmMenuPatron extends JPanel {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				IhmModificationPseudo pseudo = new IhmModificationPseudo(fils, user);
+				removeAll();
+				add(new IhmModificationPseudoPatron(user));
+				revalidate();
+				repaint();
 			}
 		});
 	}
