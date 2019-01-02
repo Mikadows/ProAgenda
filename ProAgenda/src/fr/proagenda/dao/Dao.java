@@ -203,7 +203,7 @@ public class Dao {
 	}
 	
 	/**
-	 * Retourne un user complet après l'identification
+	 * Retourne un user complet après l'identification 
 	 * @param u
 	 * @return
 	 */
