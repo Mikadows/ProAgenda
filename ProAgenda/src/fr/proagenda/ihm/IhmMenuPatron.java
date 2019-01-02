@@ -181,7 +181,7 @@ public class IhmMenuPatron extends JPanel {
 		btnVoirLesRendezvous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				removeAll();
-				add(new IhmDeuxiemePage(user));
+				add(new IhmDeuxiemePagePatron(user));
 				revalidate();
 				repaint();
 			}

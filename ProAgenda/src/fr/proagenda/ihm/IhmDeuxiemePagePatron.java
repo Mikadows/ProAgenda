@@ -21,7 +21,7 @@ import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
 import fr.proagenda.ihm.IhmChoixTechnicien;
 
-public class IhmDeuxiemePage extends JPanel {
+public class IhmDeuxiemePagePatron extends JPanel {
 	private JComboBox<Object[]> comboBoxObj;
 	private JComboBox<String> comboBox;
 	protected int posX;
@@ -33,7 +33,7 @@ public class IhmDeuxiemePage extends JPanel {
 	 * @param fils : JPannel de la fenetre précédente
 	 * @param user : utilisateur en cours 
 	 */
-	public IhmDeuxiemePage(User user) {
+	public IhmDeuxiemePagePatron(User user) {
 		this.setBounds(0, 0, 900, 500);
 		setLayout(null);
 		
