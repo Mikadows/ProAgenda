@@ -82,6 +82,7 @@ public class IhmModificationPseudoPatron extends JPanel {
         panelMainFenetre.add(btnRetour_1);
 		
 		JLabel lblModifierPseudo = new JLabel("nouveau Pseudo : ");
+		lblModifierPseudo.setForeground(Color.LIGHT_GRAY);
 		lblModifierPseudo.setBounds(358, 127, 356, 14);
 		panelMainFenetre.add(lblModifierPseudo);
 		
@@ -90,6 +91,7 @@ public class IhmModificationPseudoPatron extends JPanel {
 		panelMainFenetre.add(pseudoField);
 		
 		JLabel lblTapezLe = new JLabel("tapez le \u00E0 nouveau : ");
+		lblTapezLe.setForeground(Color.LIGHT_GRAY);
 		lblTapezLe.setBounds(358, 185, 356, 14);
 		panelMainFenetre.add(lblTapezLe);
 		

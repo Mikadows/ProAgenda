@@ -83,6 +83,7 @@ public class IhmModificationMDPTechnicien extends JPanel {
         panelMainFenetre.add(btnRetour_1);
 		
 		JLabel lblModifierMotDe = new JLabel("nouveau mot de passe : ");
+		lblModifierMotDe.setForeground(Color.LIGHT_GRAY);
 		lblModifierMotDe.setBounds(355, 127, 356, 14);
 		panelMainFenetre.add(lblModifierMotDe);
 		
@@ -91,6 +92,7 @@ public class IhmModificationMDPTechnicien extends JPanel {
 		panelMainFenetre.add(passwordField);
 		
 		JLabel lblTapezLe = new JLabel("tapez le \u00E0 nouveau : ");
+		lblTapezLe.setForeground(Color.LIGHT_GRAY);
 		lblTapezLe.setBounds(355, 185, 356, 14);
 		panelMainFenetre.add(lblTapezLe);
 		
