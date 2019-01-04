@@ -267,7 +267,7 @@ public class Ihm extends JFrame{
 						getContentPane().revalidate();
 						getContentPane().repaint();
 					}else if(next.getId_metier() == 2){
-						System.out.println("Patron");
+						System.out.println("Autre");
 						getContentPane().removeAll();
 						//TODO page clients normaux 
 						//getContentPane().add(new IhmMenuPatron(next));
