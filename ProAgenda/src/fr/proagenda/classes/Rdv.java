@@ -47,6 +47,12 @@ public class Rdv {
 		this.idAccount = 0;
 	}
 	
+	public Rdv(String dateHeure, String adresse, int idAccount) {
+		this.date = dateHeure;
+        this.adresse = adresse;
+        this.idAccount = idAccount;
+	}
+	
 	public String getHeure() {
 		return heure;
 	}

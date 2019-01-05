@@ -134,6 +134,10 @@ public class IhmMenuPatron extends JPanel {
 		button.setIcon(new ImageIcon(IhmMenuPatron.class.getResource("/fr/proagenda/img/add-file-16.png")));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				removeAll();
+				add(new IhmNouveauRdv(user));
+				revalidate();
+				repaint();
 			}
 		});
 		button.setBounds(531, 271, 185, 23);

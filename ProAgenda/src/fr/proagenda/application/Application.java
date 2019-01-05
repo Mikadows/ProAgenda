@@ -165,4 +165,13 @@ public class Application {
 		return Dao.retAllDataByUser(u);
 	}
 	
+	/**
+	 * Sauvegarde les Rdv
+	 * @param rdv
+	 * @return
+	 */
+	public static int saveRdvApp(Rdv rdv) {
+		return Dao.saveRdv(rdv);
+	}
+	
 }

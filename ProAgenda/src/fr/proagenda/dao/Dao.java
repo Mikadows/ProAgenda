@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import fr.proagenda.classes.PropertyAcces;
+import fr.proagenda.classes.Rdv;
 import fr.proagenda.classes.User;
 
 /**
@@ -243,6 +244,61 @@ public class Dao {
 		}
 		
 		return ret;		
+	}
+	
+	/**
+	 * Sauvegarde les rendez-vous
+	 * @param rdv
+	 * @return
+	 */
+	public static int saveRdv(Rdv rdv) {
+		int ret=0;
+		
+			// Etape 1 : Chargement du driver
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			}catch(ClassNotFoundException err){
+				System.err.println("Pilote non trouvé..");
+				System.err.println(err);
+				System.exit(1) ;
+				ret = 0x001;
+			}
+	
+			// Etape 2 : récupération de la connexion
+			try {
+				cn = DriverManager.getConnection(url, login, passwd);
+			}catch(SQLException err) {
+				System.err.println("Connexion impossible");
+				System.err.println(err);
+				System.exit(1) ;
+				ret = 0x002;
+			}
+	
+			// Etape 3 : Création d'un statement
+			try {
+				pstmt = cn.prepareStatement("INSERT INTO `t_rdv` (`id_account`, `addr_rdv`, `date_heure_rdv`) VALUES (?, ?, ?);");
+				pstmt.setInt(1, rdv.getIdAccount());
+				pstmt.setString(2, rdv.getAdresse());
+				pstmt.setString(3, rdv.getDate());
+				pstmt.executeUpdate();
+				ret = 1000;
+			}catch (Exception e){
+				System.err.println("requete non effectuee");
+				System.err.println(e);
+				//System.exit(1);
+				ret = 0x003;
+			}
+	
+	
+		try {
+		// Etape 6 : libérer ressources de la mémoire.
+			cn.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			ret = 0x004;
+		}
+		return ret;
 	}
 	
 	/**
