@@ -107,12 +107,12 @@ public class IhmMenuPatron extends JPanel {
 		
 		btnNewButton = new JButton("Modifier Mot de Passe");
 		btnNewButton.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/edit.png")));
-		btnNewButton.setBounds(531,339,185,23);
+		btnNewButton.setBounds(531,363,185,23);
 		panelMainFenetre.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Modifier Identifiant");
 		btnNewButton_1.setIcon(new ImageIcon(IhmMenu.class.getResource("/fr/proagenda/img/edit.png")));
-		btnNewButton_1.setBounds(531,384,185,23);
+		btnNewButton_1.setBounds(531,397,185,23);
 		panelMainFenetre.add(btnNewButton_1);
 		
 		lblProagenda = new JLabel("ProAgenda");
@@ -140,8 +140,25 @@ public class IhmMenuPatron extends JPanel {
 				repaint();
 			}
 		});
-		button.setBounds(531, 271, 185, 23);
+		button.setBounds(531, 261, 185, 23);
 		panelMainFenetre.add(button);
+		
+		JButton btnNewButton_2 = new JButton("Supprimer rendez-vous");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				removeAll();
+				add(new IhmSupprRdv(user));
+				revalidate();
+				repaint();
+			}
+		});
+		btnNewButton_2.setIcon(new ImageIcon(IhmMenuPatron.class.getResource("/fr/proagenda/img/trash-2-16.png")));
+		btnNewButton_2.setBounds(531, 295, 185, 23);
+		panelMainFenetre.add(btnNewButton_2);
+		
+		JSeparator separator_2 = new JSeparator();
+		separator_2.setBounds(503, 338, 230, 2);
+		panelMainFenetre.add(separator_2);
 				
 				
 		JPanel panelTopWindow = new JPanel();
