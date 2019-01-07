@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import fr.proagenda.classes.PropertyAcces;
 import fr.proagenda.classes.User;
 
+/**
+ * Classe Dao pour les noms des users
+ *
+ */
 public class DaoRetNomPrenom {
 	private ArrayList<Object> ret1;
 	private ArrayList<User> ret2;

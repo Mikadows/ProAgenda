@@ -145,6 +145,11 @@ public class Dao {
 		}
 	}
 	
+	/**
+	 * Modifie le mot de passe en base
+	 * @param mdp
+	 * @param utilisateur
+	 */
 	public static void modifierMDPDao(String mdp, User utilisateur) {
 		
 

@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Classe permetant d'acceder au fichier properties
+ * @author gSiwiorek
+ *
+ */
 public class PropertyAcces {
 	private String dbAddress;
 	private String dbLogin;

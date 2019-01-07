@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import fr.proagenda.classes.PropertyAcces;
 import fr.proagenda.classes.Rdv;
 
+/**
+ * Classe Dao pour les rendez-vous
+ */
 public class DaoRetRDV {
 	private ArrayList<String> ret;
 	
@@ -23,6 +26,10 @@ public class DaoRetRDV {
 	static ResultSet rs =null;
 	static Statement st =null;
 	
+	/**
+	 * Constructeur retournant la liste des rendez-vous pour un id de compte donné
+	 * @param idAccount
+	 */
 	public DaoRetRDV(int idAccount) {
 		try {
 
@@ -62,7 +69,7 @@ public class DaoRetRDV {
  				envoie.add("test");
  				setRet(envoie);
  			}
- 			System.out.println("bien amrche");
+ 			System.out.println("Bien marche");
  				
  			
  		} catch (SQLException e) {
@@ -88,6 +95,11 @@ public class DaoRetRDV {
 		this.ret = ret;
 	}
 
+	/**
+	 * Retourne une liste de rendez-vous en fonction de l'idAccount
+	 * @param idAccount
+	 * @return
+	 */
 	public static ArrayList<Rdv> getRdvByIdAccount(int idAccount){
 		ArrayList<Rdv> list = new ArrayList<Rdv>();
 		

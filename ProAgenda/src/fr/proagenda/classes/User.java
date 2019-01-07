@@ -1,5 +1,8 @@
 package fr.proagenda.classes;
 
+/**
+ * Classe décrivant un utilisateur
+ */
 public class User {	
 	
 	private String nom;

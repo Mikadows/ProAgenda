@@ -47,6 +47,12 @@ public class Rdv {
 		this.idAccount = 0;
 	}
 	
+	/**
+	 * Constructeur pour enregistrer un rendez-vous
+	 * @param dateHeure
+	 * @param adresse
+	 * @param idAccount
+	 */
 	public Rdv(String dateHeure, String adresse, int idAccount) {
 		this.date = dateHeure;
         this.adresse = adresse;
