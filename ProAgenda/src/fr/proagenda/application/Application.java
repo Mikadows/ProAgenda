@@ -174,4 +174,8 @@ public class Application {
 		return Dao.saveRdv(rdv);
 	}
 	
+	public static int deleteRdvById(int idRdv) {
+		return Dao.deleteRdvById(idRdv);
+	}
+	
 }

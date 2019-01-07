@@ -364,4 +364,57 @@ public class Dao {
 		return u1;
 	}
 	
+	/**
+	 * Supprime un rendez-vous via son id
+	 * @param idRdv
+	 * @return
+	 */
+	public static int deleteRdvById(int idRdv) {
+		int ret=0;
+		
+		// Etape 1 : Chargement du driver
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		}catch(ClassNotFoundException err){
+			System.err.println("Pilote non trouvé..");
+			System.err.println(err);
+			System.exit(1) ;
+			ret = 0x001;
+		}
+
+		// Etape 2 : récupération de la connexion
+		try {
+			cn = DriverManager.getConnection(url, login, passwd);
+		}catch(SQLException err) {
+			System.err.println("Connexion impossible");
+			System.err.println(err);
+			System.exit(1) ;
+			ret = 0x002;
+		}
+
+		// Etape 3 : Création d'un statement
+		try {
+			pstmt = cn.prepareStatement("DELETE FROM `t_rdv` WHERE `id_rdv` =?");
+			pstmt.setInt(1, idRdv);
+			pstmt.executeUpdate();
+			ret = 1000;
+		}catch (Exception e){
+			System.err.println("requete non effectuee");
+			System.err.println(e);
+			//System.exit(1);
+			ret = 0x003;
+		}
+
+
+	try {
+	// Etape 6 : libérer ressources de la mémoire.
+		cn.close();
+		pstmt.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+		ret = 0x004;
+	}
+	return ret;
+	}
+	
 }
