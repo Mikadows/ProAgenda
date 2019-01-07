@@ -21,27 +21,32 @@ public class IhmChoixTechnicien extends JScrollPane{
 	 */
 	@SuppressWarnings("serial")
 	public IhmChoixTechnicien(int id_account){
- 
-		this.setBounds(250, 70, 400, 200);
+		this.setBackground(Color.LIGHT_GRAY);
+		this.setBounds(350, 100, 500, 200);
 			      
 	    table_1 = new JTable();
+	    table_1.setCellSelectionEnabled(false);
+	    table_1.setColumnSelectionAllowed(false);
+	    table_1.setRowSelectionAllowed(true);
 	    table_1.setBackground(Color.GRAY);
 		table_1.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Date", "Heure", "Adresse", "Autre"
+				"Date", "Heure", "Adresse"
 			}
 		) {
-			@SuppressWarnings("rawtypes")
 			Class[] columnTypes = new Class[] {
-				String.class, String.class, String.class, String.class
+				String.class, String.class, String.class
 			};
-			@SuppressWarnings({ "unchecked", "rawtypes" })
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
 		});
+		table_1.getColumnModel().getColumn(0).setPreferredWidth(10);
+		table_1.getColumnModel().getColumn(1).setPreferredWidth(10);
+		table_1.getColumnModel().getColumn(2).setPreferredWidth(120);
+		
 		
 		Application app = new Application();
 		ArrayList<String> test = app.ihmToDAOGetRdv(id_account);
@@ -51,7 +56,7 @@ public class IhmChoixTechnicien extends JScrollPane{
 		if(!test.isEmpty()) {
 			for(int i = 0; i < test.size(); i+=4 ) {
 				
-				dtm.addRow(new Object[] {test.get(i).substring(0,10),test.get(i+1).substring(10,16),test.get(i+2),test.get(i+3)});
+				dtm.addRow(new Object[] {test.get(i).substring(0,10),test.get(i+1).substring(10,16),test.get(i+2)});
 			} 
 		}else {}
 		this.setViewportView(table_1);

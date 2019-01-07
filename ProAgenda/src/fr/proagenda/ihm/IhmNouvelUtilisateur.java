@@ -30,8 +30,11 @@ import javax.swing.SwingUtilities;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
+import fr.proagenda.redefineswing.RoundedCornerBorder;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 @SuppressWarnings("serial")
 public class IhmNouvelUtilisateur extends JPanel {
@@ -58,7 +61,8 @@ private int posY;
 	 * Déclaration de tous les éléments graphique de la fonction nouvelUtilisateur 
 	 */
 	public IhmNouvelUtilisateur(){
-	
+		int font = Application.getRandomNumber();
+
 	// TOP WINDOW 
 	
 			JPanel panelCloseWindow = new JPanel();
@@ -108,66 +112,146 @@ private int posY;
 	    this.setLayout(null);
 	    JLabel lblNom = new JLabel("Nom : ");
 	    lblNom.setForeground(Color.LIGHT_GRAY);
-	    lblNom.setBounds(10+Decalage,57,87,14);
+	    lblNom.setBounds(327,96,87,14);
 	    panelMainFenetre.add(lblNom);
 	    
 	    JLabel lblPrenom = new JLabel("Prenom : ");
 	    lblPrenom.setForeground(Color.LIGHT_GRAY);
-	    lblPrenom.setBounds(10+Decalage, 100, 87, 14);
+	    lblPrenom.setBounds(327, 139, 87, 14);
 	    panelMainFenetre.add(lblPrenom);
 	    
 	    JLabel lblPseudo = new JLabel("Pseudo : ");
 	    lblPseudo.setForeground(Color.LIGHT_GRAY);
-	    lblPseudo.setBounds(10+Decalage, 135, 87, 14);
+	    lblPseudo.setBounds(327, 174, 87, 14);
 	    panelMainFenetre.add(lblPseudo);
 	    
 	    JLabel lblMetier = new JLabel("metier :");
 	    lblMetier.setForeground(Color.LIGHT_GRAY);
-	    lblMetier.setBounds(10+Decalage, 169, 46, 14);
+	    lblMetier.setBounds(327, 208, 46, 14);
 	    panelMainFenetre.add(lblMetier);
 	    
 	    JLabel lblMotDePasse = new JLabel("Mot de passe : ");
 	    lblMotDePasse.setForeground(Color.LIGHT_GRAY);
-	    lblMotDePasse.setBounds(10+Decalage, 201, 126, 14);
+	    lblMotDePasse.setBounds(327, 240, 126, 14);
 	    panelMainFenetre.add(lblMotDePasse);
 	    
 	    JLabel lblRetapezLeMot = new JLabel("Retapez le Mot de passe : ");
 	    lblRetapezLeMot.setForeground(Color.LIGHT_GRAY);
-	    lblRetapezLeMot.setBounds(10+Decalage, 282, 168, 14);
+	    lblRetapezLeMot.setBounds(327, 321, 168, 14);
 	    panelMainFenetre.add(lblRetapezLeMot);
 	    
 	    
 	    	    
 	    /*Déclaration JTextField*/
-	    textFieldNom = new JTextField();
-	    textFieldNom.setBounds(177+Decalage, 54, 285, 20);
+	    textFieldNom = new JTextField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
+	    textFieldNom.setBounds(494, 93, 285, 20);
 	    panelMainFenetre.add(textFieldNom);
 	    
-	    textFieldPrenom = new JTextField();
+	    textFieldPrenom = new JTextField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 	    textFieldPrenom.setEnabled(false);
-	    textFieldPrenom.setBounds(177+Decalage, 97, 285, 20);
+	    textFieldPrenom.setBounds(494, 136, 285, 20);
 	    panelMainFenetre.add(textFieldPrenom);
 	    
-	    textFieldPseudo = new JTextField();
+	    textFieldPseudo = new JTextField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 	    textFieldPseudo.setEnabled(false);
-	    textFieldPseudo.setBounds(177+Decalage, 128, 285, 20);
+	    textFieldPseudo.setBounds(494, 167, 285, 20);
 	    panelMainFenetre.add(textFieldPseudo);
 	    
-	    passwordField = new JPasswordField();
+	    passwordField = new JPasswordField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 	    passwordField.setEnabled(false);
-	    passwordField.setBounds(177+Decalage, 198, 285, 20);
+	    passwordField.setBounds(494, 237, 285, 20);
 	    panelMainFenetre.add(passwordField);
 	    
-	    passwordField_1 = new JPasswordField();
+	    passwordField_1 = new JPasswordField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 	    passwordField_1.setEnabled(false);
-	    passwordField_1.setBounds(177+Decalage, 279, 285, 20);
+	    passwordField_1.setBounds(494, 318, 285, 20);
 	    panelMainFenetre.add(passwordField_1);
 	    
 	    
 	    
 	    /*ProgressBar*/
 	    progressBar = new JProgressBar();
-	    progressBar.setBounds(213+Decalage, 254, 220, 14);
+	    progressBar.setBounds(530, 293, 220, 14);
 	    panelMainFenetre.add(progressBar);
 	    
 	    
@@ -175,7 +259,7 @@ private int posY;
 	    /*listes*/
 	    comboBox = new JComboBox<String>();
 	    comboBox.setEnabled(false);
-	    comboBox.setBounds(261+Decalage, 167, 109, 20);
+	    comboBox.setBounds(578, 206, 109, 20);
 			
 	    panelMainFenetre.add(comboBox);
 	    comboBox.addItem("");
@@ -187,12 +271,12 @@ private int posY;
 	    /*Déclaration des Boutons*/
 	    btnRetour_1 = new JButton("Retour");
 	    btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
-        btnRetour_1.setBounds(10, 11, 89, 23);
+        btnRetour_1.setBounds(325, 11, 89, 23);
         panelMainFenetre.add(btnRetour_1);
 	    
 	    btnValider = new JButton("Valider");
 	    btnValider.setEnabled(false);
-	    btnValider.setBounds(278+Decalage, 346, 89, 23);
+	    btnValider.setBounds(595, 385, 89, 23);
 	    panelMainFenetre.add(btnValider);
 	    
 	     
@@ -202,14 +286,14 @@ private int posY;
 	    rdbtnAfficher.setForeground(Color.LIGHT_GRAY);
 	    rdbtnAfficher.setBackground(Color.DARK_GRAY);
 	    rdbtnAfficher.setEnabled(false);
-	    rdbtnAfficher.setBounds(468+Decalage, 197, 109, 23);
+	    rdbtnAfficher.setBounds(785, 236, 109, 23);
 	    panelMainFenetre.add(rdbtnAfficher);
 	    
 	    chckbxNewCheckBox = new JCheckBox("");
 	    chckbxNewCheckBox.setBackground(Color.DARK_GRAY);
 	    chckbxNewCheckBox.setForeground(Color.LIGHT_GRAY);
 	    chckbxNewCheckBox.setEnabled(false);
-	    chckbxNewCheckBox.setBounds(468+Decalage, 282, 97, 23);
+	    chckbxNewCheckBox.setBounds(785, 321, 97, 23);
 	    panelMainFenetre.add(chckbxNewCheckBox);
 	    JPanel panelTopWindow = new JPanel();
 	    
@@ -237,6 +321,11 @@ private int posY;
 	    @SuppressWarnings("unused")
 		JLabel lblErreurSQL = new JLabel("Pseudo déjà utilisé");
 	    
+	    
+	    JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/fond_"+font+".jpeg")));
+		label.setBounds(-5, 0, 320, 500);
+		panelMainFenetre.add(label);
 	    
 	    
 	    /*Appel Des Listenner*/

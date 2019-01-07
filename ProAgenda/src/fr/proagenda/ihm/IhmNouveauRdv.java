@@ -8,9 +8,12 @@ import javax.swing.JPanel;
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.Rdv;
 import fr.proagenda.classes.User;
+import fr.proagenda.redefineswing.RoundedCornerBorder;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -109,7 +112,23 @@ public class IhmNouveauRdv extends JPanel {
 		/*
 		 * Saisie adresse
 		 */
-		textField = new JTextField();
+		textField = new JTextField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 		textField.setBounds(505, 229, 214, 20);
 		add(textField);
 		textField.setColumns(10);
@@ -120,7 +139,23 @@ public class IhmNouveauRdv extends JPanel {
 		lblNewLabel_1.setBounds(358, 275, 103, 14);
 		add(lblNewLabel_1);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JTextField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 		textField_1.setColumns(10);
 		textField_1.setBounds(505, 274, 214, 20);
 		add(textField_1);

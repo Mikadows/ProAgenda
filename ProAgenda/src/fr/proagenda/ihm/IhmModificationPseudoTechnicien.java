@@ -1,6 +1,8 @@
 package fr.proagenda.ihm;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,7 @@ import javax.swing.JTextField;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
+import fr.proagenda.redefineswing.RoundedCornerBorder;
 
 public class IhmModificationPseudoTechnicien extends JPanel {
 	private JTextField pseudoField;
@@ -86,7 +89,23 @@ public class IhmModificationPseudoTechnicien extends JPanel {
 		lblModifierPseudo.setBounds(358, 127, 356, 14);
 		panelMainFenetre.add(lblModifierPseudo);
 		
-		pseudoField = new JTextField();
+		pseudoField = new JTextField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 		pseudoField.setBounds(520, 124, 339, 20);
 		panelMainFenetre.add(pseudoField);
 		
@@ -95,7 +114,23 @@ public class IhmModificationPseudoTechnicien extends JPanel {
 		lblTapezLe.setBounds(358, 185, 356, 14);
 		panelMainFenetre.add(lblTapezLe);
 		
-		pseudoField_1 = new JTextField();
+		pseudoField_1 = new JTextField() {
+			  @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 		pseudoField_1.setBounds(520, 182, 339, 20);
 		panelMainFenetre.add(pseudoField_1);
 		

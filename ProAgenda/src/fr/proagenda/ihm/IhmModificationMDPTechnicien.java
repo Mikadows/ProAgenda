@@ -1,6 +1,8 @@
 package fr.proagenda.ihm;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +17,7 @@ import javax.swing.JPasswordField;
 
 import fr.proagenda.application.Application;
 import fr.proagenda.classes.User;
+import fr.proagenda.redefineswing.RoundedCornerBorder;
 
 public class IhmModificationMDPTechnicien extends JPanel {
 	private JPasswordField passwordField;
@@ -87,7 +90,23 @@ public class IhmModificationMDPTechnicien extends JPanel {
 		lblModifierMotDe.setBounds(355, 127, 356, 14);
 		panelMainFenetre.add(lblModifierMotDe);
 		
-		passwordField = new JPasswordField();
+		passwordField = new JPasswordField(){
+			 @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 		passwordField.setBounds(517, 124, 339, 20);
 		panelMainFenetre.add(passwordField);
 		
@@ -96,7 +115,23 @@ public class IhmModificationMDPTechnicien extends JPanel {
 		lblTapezLe.setBounds(355, 185, 356, 14);
 		panelMainFenetre.add(lblTapezLe);
 		
-		passwordField_1 = new JPasswordField();
+		passwordField_1 = new JPasswordField(){
+			 @Override protected void paintComponent(Graphics g) {
+				    if (!isOpaque() && getBorder() instanceof RoundedCornerBorder) {
+				      Graphics2D g2 = (Graphics2D) g.create();
+				      g2.setPaint(getBackground());
+				      g2.fill(((RoundedCornerBorder) getBorder()).getBorderShape(
+				          0, 0, getWidth() - 1, getHeight() - 1));
+				      g2.dispose();
+				    }
+				    super.paintComponent(g);
+				  }
+				  @Override public void updateUI() {
+				    super.updateUI();
+				    setOpaque(false);
+				    setBorder(new RoundedCornerBorder());
+				  }
+				};
 		passwordField_1.setBounds(517, 182, 339, 20);
 		panelMainFenetre.add(passwordField_1);
 		

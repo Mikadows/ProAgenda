@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -34,6 +35,7 @@ public class IhmDeuxiemePagePatron extends JPanel {
 	 * @param user : utilisateur en cours 
 	 */
 	public IhmDeuxiemePagePatron(User user) {
+		int font = Application.getRandomNumber();
 		this.setBounds(0, 0, 900, 500);
 		setLayout(null);
 		
@@ -73,7 +75,7 @@ public class IhmDeuxiemePagePatron extends JPanel {
 		JButton btnRetour_1 = new JButton("Retour");
 		
         btnRetour_1.setIcon(new ImageIcon(Ihm.class.getResource("/com/sun/javafx/scene/web/skin/Undo_16x16_JFX.png")));
-        btnRetour_1.setBounds(10, 11, 89, 23);
+        btnRetour_1.setBounds(320, 11, 89, 23);
         btnRetour_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 //				IhmMenu menu = new IhmMenu(fils, user);
@@ -90,7 +92,7 @@ public class IhmDeuxiemePagePatron extends JPanel {
 		
 		
 		comboBox = new JComboBox<String>();
-		comboBox.setBounds(320, 30, 200, 20);
+		comboBox.setBounds(446, 52, 200, 20);
 	    
 	    panelMainFenetre.add(comboBox);
 
@@ -102,7 +104,7 @@ public class IhmDeuxiemePagePatron extends JPanel {
 		} 		
  		
  		JButton btnValider = new JButton("Valider");
-		btnValider.setBounds(600, 30, 89, 23);
+		btnValider.setBounds(726, 52, 89, 23);
 		panelMainFenetre.add(btnValider);
  		 
 		btnValider.addActionListener(new ActionListener() {
@@ -133,6 +135,11 @@ public class IhmDeuxiemePagePatron extends JPanel {
 	    panelTopWindow.setBounds(0, 0, 866, 23);
 	    this.add(panelTopWindow);
 	    panelTopWindow.setLayout(null);
+	    
+	    JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Ihm.class.getResource("/fr/proagenda/img/fond_"+font+".jpeg")));
+		label.setBounds(-5, 0, 320, 500);
+		panelMainFenetre.add(label);
 	
 		revalidate();
 		repaint();
