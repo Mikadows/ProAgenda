@@ -175,12 +175,12 @@ public class Application {
 	}
 	
 	/**
-	 * Supprime un rdv via son Id
+	 * Supprime un rdv via son Id bliat
 	 * @param idRdv
 	 * @return
 	 */
-	public static int deleteRdvById(int idRdv) {
-		return Dao.deleteRdvById(idRdv);
+	public static int deleteRdvById(int idAccount, String dateHeure, String adresse) {
+		return Dao.deleteRdvById(Dao.findIdRdv(idAccount, dateHeure, adresse));
 	}
 	
 }
