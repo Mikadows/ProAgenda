@@ -174,6 +174,11 @@ public class Application {
 		return Dao.saveRdv(rdv);
 	}
 	
+	/**
+	 * Supprime un rdv via son Id
+	 * @param idRdv
+	 * @return
+	 */
 	public static int deleteRdvById(int idRdv) {
 		return Dao.deleteRdvById(idRdv);
 	}
