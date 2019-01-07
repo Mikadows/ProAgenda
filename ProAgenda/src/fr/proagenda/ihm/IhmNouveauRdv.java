@@ -173,8 +173,7 @@ public class IhmNouveauRdv extends JPanel {
 		comboBox.setBounds(505, 181, 214, 20);
 		add(comboBox);
 		
-	    Application app = new Application();
-		ArrayList<User> users = app.ihmtoDAOGetNomPrenomUSER();
+		ArrayList<User> users = Application.ihmtoDAOGetNomPrenomUSER();
 		
 		for(int i = 0; i < users.size(); i++ ) {
 			comboBox.addItem(users.get(i).getNom()+" "+users.get(i).getPrenom());

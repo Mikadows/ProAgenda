@@ -102,7 +102,7 @@ public class Application {
 	 * fonction permettant de récuprérer les nom et prénom des techniciens
 	 * @return test : ArrayList<Object> contenant nom prénom
 	 */
-	public ArrayList<User> ihmtoDAOGetNomPrenomUSER(){
+	public static ArrayList<User> ihmtoDAOGetNomPrenomUSER(){
 		DaoRetNomPrenom data = new DaoRetNomPrenom();
 		ArrayList<User> test = data.getRet2();
 		
@@ -113,7 +113,7 @@ public class Application {
 	 * fonction permettant de récuprérer lesrendez-vous des techniciens
 	 * @return test : ArrayList<Object> contenant date heure adresse string
 	 */
-	public ArrayList<String> ihmToDAOGetRdv(int idAccount){
+	public static ArrayList<String> ihmToDAOGetRdv(int idAccount){
 		DaoRetRDV data = new DaoRetRDV(idAccount);
 		ArrayList<String> test = data.getRet();
 		

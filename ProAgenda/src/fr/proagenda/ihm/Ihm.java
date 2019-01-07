@@ -69,6 +69,7 @@ public class Ihm extends JFrame{
 	
     private int posX;
 	private int posY;
+	private JPanel panelMainFenetre;
 
 	
 	/**
@@ -110,7 +111,7 @@ public class Ihm extends JFrame{
 		btnX.setBackground(Color.DARK_GRAY);
 		panelCloseWindow.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnX}));
 		
-		JPanel panelMainFenetre = new JPanel();
+		panelMainFenetre = new JPanel();
 		panelMainFenetre.setBackground(Color.DARK_GRAY);
 		panelMainFenetre.setBounds(309, 0, 596, 522);
 		getContentPane().add(panelMainFenetre);
@@ -246,22 +247,22 @@ public class Ihm extends JFrame{
 					JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
 					lblPseudoOuMot.setForeground(Color.RED);
 					lblPseudoOuMot.setBounds(327, 300, 253, 14);
-					contentPane.add(lblPseudoOuMot);
-					contentPane.revalidate();
-					contentPane.repaint();
+					panelMainFenetre.add(lblPseudoOuMot);
+					panelMainFenetre.revalidate();
+					panelMainFenetre.repaint();
 				}else if (connexion == 1) {
 					User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
 					next = Application.getDataUserByUser(next);
-					System.out.println("oooooo");
+//					System.out.println("oooooo");
 					if(next.getId_metier() == 1) {
-						System.out.println("Technicien");
+//						System.out.println("Technicien");
 						getContentPane().removeAll();
 						getContentPane().add(new IhmMenu(next));
 						getContentPane().revalidate();
 						getContentPane().repaint();
 
 					}else if(next.getId_metier() == 0){
-						System.out.println("Patron");
+//						System.out.println("Patron");
 						getContentPane().removeAll();
 						getContentPane().add(new IhmMenuPatron(next));
 						getContentPane().revalidate();
@@ -292,9 +293,9 @@ public class Ihm extends JFrame{
 						JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
 						lblPseudoOuMot.setForeground(Color.RED);
 						lblPseudoOuMot.setBounds(327, 300, 253, 14);
-						contentPane.add(lblPseudoOuMot);
-						contentPane.revalidate();
-						contentPane.repaint();
+						panelMainFenetre.add(lblPseudoOuMot);
+						panelMainFenetre.revalidate();
+						panelMainFenetre.repaint();
 					}else if (connexion == 1) {
 						User next = new User(pseudo, Application.getShaApp(new String (motPasse)));
 						next = Application.getDataUserByUser(next);
