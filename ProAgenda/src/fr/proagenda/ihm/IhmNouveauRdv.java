@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.proagenda.application.Application;
+import fr.proagenda.classes.Rdv;
 import fr.proagenda.classes.User;
 
 import java.awt.Color;
@@ -130,10 +131,7 @@ public class IhmNouveauRdv extends JPanel {
 		label_1.setBounds(505, 305, 214, 23);
 		add(label_1);
 		
-		JButton btnValider = new JButton("Valider");
-		btnValider.setIcon(new ImageIcon(IhmNouveauRdv.class.getResource("/fr/proagenda/img/check-mark-12-16.png")));
-		btnValider.setBounds(572, 362, 89, 23);
-		add(btnValider);
+		
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();
@@ -146,7 +144,17 @@ public class IhmNouveauRdv extends JPanel {
 		for(int i = 0; i < users.size(); i++ ) {
 			comboBox.addItem(users.get(i).getNom()+" "+users.get(i).getPrenom());
 		}
-
+		
+		JButton btnValider = new JButton("Valider");
+		btnValider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Rdv rendezVous = new Rdv(textField_1.getText(), textField.getText(), Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
+				Application.saveRdvApp(rendezVous);
+			}
+		});
+		btnValider.setIcon(new ImageIcon(IhmNouveauRdv.class.getResource("/fr/proagenda/img/check-mark-12-16.png")));
+		btnValider.setBounds(572, 362, 89, 23);
+		add(btnValider);
 		
 	}
 }

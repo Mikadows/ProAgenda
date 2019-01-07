@@ -50,7 +50,8 @@ public class IhmChoixTechnicien extends JScrollPane{
 		
 		if(!test.isEmpty()) {
 			for(int i = 0; i < test.size(); i+=4 ) {
-					dtm.addRow(new Object[] {test.get(i),test.get(i+1),test.get(i+2),test.get(i+3)});
+				
+				dtm.addRow(new Object[] {test.get(i).substring(0,10),test.get(i+1).substring(10,16),test.get(i+2),test.get(i+3)});
 			} 
 		}else {}
 		this.setViewportView(table_1);

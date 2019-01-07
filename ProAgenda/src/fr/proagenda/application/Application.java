@@ -127,7 +127,7 @@ public class Application {
 	 * @param users : ArrayList<Users> contenant tous les techniciens
 	 * @return id : val de l'id ou -1 si pas de valeur
 	 */
-	public int retIDCompteWithName(String nomPrenom, ArrayList<User> users) {
+	public static int retIDCompteWithName(String nomPrenom, ArrayList<User> users) {
 		int valID=-1;
 		for(int i = 0; i < users.size(); i++) {
 			if(nomPrenom.equals(users.get(i).getNom()+" "+users.get(i).getPrenom())) {
