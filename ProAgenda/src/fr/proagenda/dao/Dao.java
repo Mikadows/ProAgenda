@@ -18,14 +18,24 @@ import fr.proagenda.classes.User;
  */
 public class Dao {
 
+//	//private static PropertyAcces prop = new PropertyAcces();
+//	//private static String url = "jdbc:mysql://"+prop.getDbAddress()+":"+prop.getDbPort()+"/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+//	private static String url = "jdbc:mysql://localhost:3306/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+//	private static String login = "root";//prop.getDbLogin();
+//	private static String passwd = "";//prop.getDbPswd();
+//	private static Connection cn =null;
+//	private static PreparedStatement pstmt =null;
+//	private static ResultSet rs =null;
+//	private static Statement st =null;
+	
 	private static PropertyAcces prop = new PropertyAcces();
 	private static String url = "jdbc:mysql://"+prop.getDbAddress()+":"+prop.getDbPort()+"/proagenda?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
 	private static String login = prop.getDbLogin();
 	private static String passwd = prop.getDbPswd();
-	private static Connection cn =null;
-	private static PreparedStatement pstmt =null;
-	private static ResultSet rs =null;
-	private static Statement st =null;
+	static Connection cn =null;
+	static PreparedStatement pstmt =null;
+	static ResultSet rs =null;
+	static Statement st =null;
 	
 	/**
 	 * Compare les identifiants
@@ -415,6 +425,64 @@ public class Dao {
 		ret = 0x004;
 	}
 	return ret;
+	}
+	
+	/**
+	 * Trouve l'id d'un rendez-vous
+	 * @param idAccount
+	 * @param dateHeure
+	 * @param adresse
+	 * @return
+	 */
+	public static int findIdRdv(int idAccount, String dateHeure, String adresse) {
+		int ret = 0;
+		
+		try {
+
+			// Etape 1 : Chargement du driver
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			}catch(ClassNotFoundException err){
+				System.err.println("Pilote non trouvé..");
+				System.err.println(err);
+				//     System.exit(1) ;
+			}
+
+			// Etape 2 : récupération de la connexion
+			try {
+				cn = DriverManager.getConnection(url, login, passwd);
+			}catch(SQLException err) {
+				System.err.println("Connexion impossible");
+				System.err.println(err);
+				//System.exit(1) ;
+			}
+
+			// Etape 3 : Création d'un statement
+			st = cn.createStatement();
+
+			String sql = "SELECT `id_rdv`FROM `t_rdv` WHERE `addr_rdv` = \""+adresse+"\" AND `date_heure_rdv` = \""+dateHeure+"\" AND `id_account` ="+idAccount+";";
+
+			// Etape 4 : exécution requête
+			rs = st.executeQuery(sql);
+
+			// Si récup données alors étapes 5 (parcours Resultset)
+			while(rs.next()) {
+				ret = rs.getInt("id_rdv");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+			// Etape 6 : libérer ressources de la mémoire.
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return ret;
 	}
 	
 }

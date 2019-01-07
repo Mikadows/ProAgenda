@@ -152,10 +152,12 @@ public class IhmSupprRdv extends JPanel {
 		JButton btnValider = new JButton("Valider");
 		btnValider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO 
-				System.out.println("t1 : "+comboBoxRdv.getSelectedItem().toString().substring(0,19));
-				System.out.println("t2 : "+comboBoxRdv.getSelectedItem().toString().substring(20));
-				System.out.println("t3 : "+Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
+//				System.out.println("t1 : "+comboBoxRdv.getSelectedItem().toString().substring(0,19));
+//				System.out.println("t2 : "+comboBoxRdv.getSelectedItem().toString().substring(20));
+//				System.out.println("t3 : "+Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
+				Application.deleteRdvById(+Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users),
+										   comboBoxRdv.getSelectedItem().toString().substring(0,19),
+										   comboBoxRdv.getSelectedItem().toString().substring(20));
 			}
 		});
 		btnValider.setIcon(new ImageIcon(IhmNouveauRdv.class.getResource("/fr/proagenda/img/check-mark-12-16.png")));
