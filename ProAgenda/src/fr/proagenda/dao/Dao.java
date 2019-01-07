@@ -12,7 +12,7 @@ import fr.proagenda.classes.Rdv;
 import fr.proagenda.classes.User;
 
 /**
- * Classe Data Acces Object : Permmet d'accéder à la BDD
+ * Classe Data Acces Object : Permet d'accéder à la BDD
  * @author Gwendal
  *
  */
