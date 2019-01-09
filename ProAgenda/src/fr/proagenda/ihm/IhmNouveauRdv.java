@@ -9,25 +9,43 @@ import fr.proagenda.application.Application;
 import fr.proagenda.classes.Rdv;
 import fr.proagenda.classes.User;
 import fr.proagenda.redefineswing.RoundedCornerBorder;
+import fr.proagenda.ihm.Cal;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class IhmNouveauRdv extends JPanel {
 	private int font = Application.getRandomNumber();
 	private JTextField textField;
 	private JTextField textField_1;
+	private Cal fenCal;
+	
+	private String date;
+	private int posX,posXTemp;
+	private int posY,posYTemp;
+	private int jour,mois,annee;
 
 	/**
 	 * Create the panel.
@@ -166,7 +184,7 @@ public class IhmNouveauRdv extends JPanel {
 		label_1.setBounds(505, 305, 214, 23);
 		add(label_1);
 		
-		
+	
 		
 		@SuppressWarnings("rawtypes")
 		JComboBox comboBox = new JComboBox();
@@ -184,11 +202,35 @@ public class IhmNouveauRdv extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				Rdv rendezVous = new Rdv(textField_1.getText(), textField.getText(), Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
 				Application.saveRdvApp(rendezVous);
+				removeAll();
+				add(new IhmMenuPatron(user));
+				revalidate();
+				repaint();
 			}
 		});
 		btnValider.setIcon(new ImageIcon(IhmNouveauRdv.class.getResource("/fr/proagenda/img/check-mark-12-16.png")));
 		btnValider.setBounds(572, 362, 89, 23);
 		add(btnValider);
 		
+		posXTemp = this.getLocation().x;
+		posYTemp = this.getLocation().y;
+		JButton btnCal = new JButton("");
+		btnCal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//TODO Récupérer les data du calendrier ...
+				IhmNewCalendar f = new IhmNewCalendar(); 
+			    f.setLocation(JFrame.getWindows()[JFrame.getWindows().length-2].getLocation().x+10,JFrame.getWindows()[JFrame.getWindows().length-2].getLocation().y+100);
+			    f.setVisible(true);
+
+			}
+		});
+		btnCal.setIcon(new ImageIcon(IhmNouveauRdv.class.getResource("/fr/proagenda/img/tear-of-calendar-16.png")));
+		btnCal.setBounds(738, 273, 23, 23);
+		add(btnCal);
+		
+	}
+	
+	public void setDateNewRDV(String date) {
+		this.date=date;
 	}
 }
