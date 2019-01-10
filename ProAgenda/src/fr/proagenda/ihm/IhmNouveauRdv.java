@@ -339,7 +339,7 @@ public class IhmNouveauRdv extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				setDateNewRDV(textFieldDate.getText()+" "+comboBoxHeure.getSelectedItem()+":"+comboBoxMinutes.getSelectedItem()+":00");
 				System.out.println("date : "+date);
-				Rdv rendezVous = new Rdv(textFieldDate.getText(), textFieldAddress.getText(), Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
+				Rdv rendezVous = new Rdv(date, textFieldAddress.getText(), Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users));
 				Application.saveRdvApp(rendezVous);
 				removeAll();
 				add(new IhmMenuPatron(user));
