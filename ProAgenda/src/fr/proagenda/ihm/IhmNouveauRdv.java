@@ -196,11 +196,11 @@ public class IhmNouveauRdv extends JPanel {
 		textFieldDate.setEnabled(false);
 		panelMainFenetre.add(textFieldDate);
 		
-		JLabel label_1 = new JLabel("YYYY-MM-JJ espace hh:mm:ss");
-		label_1.setForeground(Color.LIGHT_GRAY);
-		label_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		label_1.setBounds(505, 305, 214, 23);
-		panelMainFenetre.add(label_1);
+		JLabel lblYyyymmjj = new JLabel("YYYY-MM-JJ");
+		lblYyyymmjj.setForeground(Color.LIGHT_GRAY);
+		lblYyyymmjj.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblYyyymmjj.setBounds(505, 305, 214, 23);
+		panelMainFenetre.add(lblYyyymmjj);
 		
 	
 		
