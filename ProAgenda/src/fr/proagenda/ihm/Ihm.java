@@ -26,6 +26,8 @@ import javax.swing.UIManager;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 
@@ -49,6 +51,8 @@ import java.awt.event.MouseMotionAdapter;
 public class Ihm extends JFrame{
 //	private static int height= 900;
 //	private static int width = 500; 
+	private static int posXErr = 230;
+	private static int posYErr = 310;
 
 	private JPanel contentPane;
 	private JTextField pseudoField;
@@ -79,7 +83,8 @@ public class Ihm extends JFrame{
 	 */
 	public Ihm() {	
 		int font = Application.getRandomNumber();
-		
+		this.setTitle("ProAgenda <3");
+		this.setIconImage(createImage("/fr/proagenda/img/logo.png").getImage());
 		this.setUndecorated(true);
 		try { 
 		    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -246,7 +251,7 @@ public class Ihm extends JFrame{
 				if(connexion == 0) {
 					JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
 					lblPseudoOuMot.setForeground(Color.RED);
-					lblPseudoOuMot.setBounds(327, 300, 253, 14);
+					lblPseudoOuMot.setBounds(posXErr, posYErr, 253, 14);
 					panelMainFenetre.add(lblPseudoOuMot);
 					panelMainFenetre.revalidate();
 					panelMainFenetre.repaint();
@@ -292,7 +297,7 @@ public class Ihm extends JFrame{
 					if(connexion == 0) {
 						JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
 						lblPseudoOuMot.setForeground(Color.RED);
-						lblPseudoOuMot.setBounds(327, 300, 253, 14);
+						lblPseudoOuMot.setBounds(posXErr, posYErr, 253, 14);
 						panelMainFenetre.add(lblPseudoOuMot);
 						panelMainFenetre.revalidate();
 						panelMainFenetre.repaint();
@@ -332,7 +337,7 @@ public class Ihm extends JFrame{
 					if(connexion == 0) {
 						JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
 						lblPseudoOuMot.setForeground(Color.RED);
-						lblPseudoOuMot.setBounds(327, 300, 253, 14);
+						lblPseudoOuMot.setBounds(posXErr, posYErr, 253, 14);
 						contentPane.add(lblPseudoOuMot);
 						contentPane.revalidate();
 						contentPane.repaint();
@@ -360,7 +365,7 @@ public class Ihm extends JFrame{
 					if(connexion == 0) {
 						JLabel lblPseudoOuMot = new JLabel("pseudo ou mot de passe incorrect");
 						lblPseudoOuMot.setForeground(Color.RED);
-						lblPseudoOuMot.setBounds(327, 300, 253, 14);
+						lblPseudoOuMot.setBounds(posXErr, posYErr, 253, 14);
 						contentPane.add(lblPseudoOuMot);
 						contentPane.revalidate();
 						contentPane.repaint();
@@ -698,5 +703,9 @@ public class Ihm extends JFrame{
 				}	
 			}
 		});
+	}
+	
+	private ImageIcon createImage(String path) {
+		return new ImageIcon(java.awt.Toolkit.getDefaultToolkit().getClass().getResource(path));
 	}
 }

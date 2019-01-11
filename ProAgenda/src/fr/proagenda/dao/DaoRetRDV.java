@@ -54,7 +54,7 @@ public class DaoRetRDV {
  			// Etape 3 : Création d'un statement
  			st = cn.createStatement();
 
- 			String sql = "SELECT addr_rdv , date_heure_rdv  FROM t_rdv WHERE id_account="+idAccount;
+ 			String sql = "SELECT addr_rdv , date_heure_rdv  FROM t_rdv WHERE id_account="+idAccount+" ORDER BY date_heure_rdv";
 
  			// Etape 4 : exécution requête
  			rs = st.executeQuery(sql);

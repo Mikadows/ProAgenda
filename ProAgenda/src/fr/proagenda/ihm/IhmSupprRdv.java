@@ -155,6 +155,10 @@ public class IhmSupprRdv extends JPanel {
 				Application.deleteRdvById(Application.retIDCompteWithName((String) comboBox.getSelectedItem(), users),
 										   comboBoxRdv.getSelectedItem().toString().substring(0,19),
 										   comboBoxRdv.getSelectedItem().toString().substring(20));
+				removeAll();
+				add(new IhmMenuPatron(user));
+				revalidate();
+				repaint();
 			}
 		});
 		btnValider.setIcon(new ImageIcon(IhmNouveauRdv.class.getResource("/fr/proagenda/img/check-mark-12-16.png")));

@@ -23,7 +23,7 @@ public class PropertyAcces {
 
 		try {
 
-			input = new FileInputStream("config.properties");
+			input = new FileInputStream("C:/Users/mathieu/Documents/config.properties");
 
 			// load a properties file
 			prop.load(input);

@@ -2,6 +2,8 @@ package fr.proagenda.main;
 
 import fr.proagenda.ihm.Ihm;
 import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 
 public class Main {

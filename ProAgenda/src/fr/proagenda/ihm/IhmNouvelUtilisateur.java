@@ -38,6 +38,8 @@ import java.awt.Graphics2D;
 
 @SuppressWarnings("serial")
 public class IhmNouvelUtilisateur extends JPanel {
+	private static int posXErr = 425;
+	private static int posYErr =270;
 
 
 private JTextField textFieldPrenom;
@@ -395,7 +397,7 @@ private int posY;
 	            int val =100 * passwordField.getCaretPosition() /40 ;
 	            progressBar.setValue(val);
 	             try{
-	                InputStream flux=new FileInputStream("MostPopularPasswords.txt"); 
+	                InputStream flux=new FileInputStream("C:/Users/mathieu/Documents/MostPopularPasswords.txt"); 
 	                InputStreamReader lecture=new InputStreamReader(flux);
 	                BufferedReader buff=new BufferedReader(lecture);
 	                String ligne;
@@ -404,20 +406,20 @@ private int posY;
 	                while ((ligne=buff.readLine())!=null){
 	                    if(passwordField.getText().equals(ligne)) {
 	                        lblTaillemdp.setText("mot de passe Courant, modifiez le !");
-	                        lblTaillemdp.setBounds(220+Decalage, 229, 200, 14);
+	                        lblTaillemdp.setBounds(posXErr+Decalage, posYErr, 200, 14);
 	                        lblTaillemdp.setForeground(Color.RED);
 	                        valT=2;
 	                        progressBar.setForeground(Color.RED);
 	                    }else if(passwordField.getText().indexOf(ligne)>=0) {
 	                        lblTaillemdp.setText("Un mot de passe courant est contenu");
-	                        lblTaillemdp.setBounds(215+Decalage, 229, 220, 14);
+	                        lblTaillemdp.setBounds(posXErr+Decalage-5, posYErr, 220, 14);
 	                        lblTaillemdp.setForeground(Color.ORANGE);
 	                        valT =1;
 	                        progressBar.setForeground(Color.ORANGE);
 	                    }else if(passwordField.getCaretPosition()<10 && valT !=2 && valT!=1) {
 	                        lblTaillemdp.setText("mot de passe Court !");
-	                        lblTaillemdp.setBounds(250+Decalage, 229, 200, 14);
-	                        lblTaillemdp.setForeground(Color.BLUE);
+	                        lblTaillemdp.setBounds(posXErr+Decalage+30, posYErr, 200, 14);
+	                        lblTaillemdp.setForeground(Color.CYAN);
 	                        if(valT==1) {
 	                            progressBar.setForeground(Color.ORANGE);
 	                        }else if(valT==2){
