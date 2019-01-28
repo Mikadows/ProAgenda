@@ -64,6 +64,8 @@ public class IhmSupprRdv extends JPanel {
 		
 		btnX.setVisible(true);
 		btnX.setBackground(Color.DARK_GRAY);
+		
+		//TEST
 
 		// TOP WINDOW 
 		panelMainFenetre = new JPanel();
